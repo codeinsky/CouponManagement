@@ -3,12 +3,7 @@ package cuponSystemException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 
-public class CuponSystemException extends Exception {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class RunTimeException extends RuntimeException {
 
 	@Override
 	public synchronized Throwable fillInStackTrace() {
@@ -74,9 +69,6 @@ public class CuponSystemException extends Exception {
 	public String toString() {
 		// TODO Auto-generated method stub
 		return super.toString();
-	}
-	public void devition() {
-		System.out.println("Pls do not 0 for devition");
 	}
 
 }
