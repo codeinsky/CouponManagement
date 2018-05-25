@@ -11,3 +11,18 @@
 						git push -u origin master
 - Project Steps 
  New step
+ 
+ 
+  								UBUNTO JDataBase connections steps:
+ 1. Server start 
+ Go to jdbc:derby://10.13.1.1:1527/CuponSystemDB
+ 2. Start the server with ./NetworkServerControl start/shutdown 
+ 3. Open other terminal start IJ 
+ 4. Connect to local SQl server   : 'jdbc:derby:CuponSystemDB;'
+ 5. Show tables and so on .....
+ 
+ 								JAVA Derby DB Driver add to a project 
+ 1. Right click on the project name then go to build path 
+ 2. Build path 
+ 3. Add external archive  and then java client DB 
+ 
