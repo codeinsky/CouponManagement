@@ -12,7 +12,7 @@ public class DataBaseCreate {
 		String sql = "Create table Cupon(ID INT , NAME VARCHAR(20))";
 		java.sql.Statement st = con.createStatement();
 		st.executeUpdate(sql);
-		
+		System.out.println("test");
 
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block

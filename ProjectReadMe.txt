@@ -26,3 +26,12 @@
  2. Build path 
  3. Add external archive  and then java client DB 
  
+ 									Project Progress 
+1.Phase 1
+	* connection pool - in progress  
+		- full Threads test - NEED 
+		- connection statement works - DONE 
+		- get /return - DONE  
+ 		- Exceptions change to origin  - NEED  
+ 		- wait and notify when all 10 connections a used - NEED  
+ 	 * 
