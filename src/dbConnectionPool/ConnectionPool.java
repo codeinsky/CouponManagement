@@ -13,8 +13,6 @@ public class ConnectionPool {
 	// declaring all variables 
 private Set<Connection> connectionPool= new HashSet<>();
 String url = "jdbc:derby://localhost:1527/CuponSystemDB;"; // database URL , driver , port 
-public static int availbleConnections; 
-public static int ConnectionsInUsage;
 private int connectionCount = 10; 
 	
 private static ConnectionPool instance; // single ton instance of ConnectionPool
@@ -24,7 +22,7 @@ private  ConnectionPool() {
 		for (int i = 0; i < connectionCount ; i++) {
 			connectionPool.add(createConnection());
 			System.out.println("Connection " + i + " is created");
-			availbleConnections ++;
+			
 		}
 	}
 // 
@@ -43,29 +41,28 @@ private Connection createConnection() {
 	}
 
 	//  Retrieving  connection from the pool  
- public  Connection getConnection() {
+ public synchronized  Connection getConnection() {
 	 Connection con = null; 
 	 Iterator<Connection> it = connectionPool.iterator();
-	 if (it.hasNext()) {
-		 con = it.next();
+	 while(connectionPool.isEmpty()) {
+		 try {
+			 System.out.println("No connection left , wait");
+			wait();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	 }
-	 else {try {
-		wait();
-	} catch (InterruptedException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}}
-	 availbleConnections --; 
-	 ConnectionsInUsage ++;
+	 con = it.next();
+	 connectionPool.remove(con);
+	 System.out.println(connectionPool.size() + " Connections left in the Pool");
 	 return con;
  }
  
  	// Returning connection from the pool 
- public void returnConnection(Connection con) {
+ public synchronized void returnConnection(Connection con) {
 	 connectionPool.add(con);
-	// notify();
-	 availbleConnections ++; 
-	 ConnectionsInUsage --;
+	 notify();
+	 
  }
  
  //Closing all connections 
@@ -75,7 +72,6 @@ private Connection createConnection() {
 			System.out.println("Connection closed");
 			con.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
