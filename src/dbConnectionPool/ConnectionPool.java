@@ -42,17 +42,20 @@ private Connection createConnection() {
 
 	//  Retrieving  connection from the pool  
  public synchronized  Connection getConnection() {
-	 Connection con = null; 
-	 Iterator<Connection> it = connectionPool.iterator();
-	 while(connectionPool.isEmpty()) {
+	// Iterator<Connection> it = connectionPool.iterator(); need to ask Teacher
+	
 		 try {
+			 while (connectionPool.isEmpty()) {
 			 System.out.println("No connection left , wait");
 			wait();
+	
+			
+			 }
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-	 }
-	 con = it.next();
+	 Iterator<Connection> it = connectionPool.iterator();
+	 Connection con = it.next();
 	 connectionPool.remove(con);
 	 System.out.println(connectionPool.size() + " Connections left in the Pool");
 	 return con;
@@ -61,10 +64,14 @@ private Connection createConnection() {
  	// Returning connection from the pool 
  public synchronized void returnConnection(Connection con) {
 	 connectionPool.add(con);
-	 notify();
+	 notifyAll();
 	 
  }
  
+ public int ConnectionAmoutCheck() {
+ return connectionPool.size();	 
+ }
+  
  //Closing all connections 
  public void closeConnections() {
 	for (Connection con  : connectionPool) {

@@ -6,17 +6,14 @@ import java.util.Random;
 
 import dbConnectionPool.ConnectionPool;
 
-public class PoolCheck implements Runnable {
+public class PoolCheck extends Thread {
 
 	@Override
 	public void run() {
 		
-			AddNewEmployee();
-	
+		for (int i = 0; i < 10; i++) {
 			
 		
-	}
-	public void AddNewEmployee() {
 		Random ran = new Random();
 		int id = ran.nextInt(100);
 		String sql = "INSERT INTO CUPON VALUES(" + id + ",'0 connections')";
@@ -25,13 +22,13 @@ public class PoolCheck implements Runnable {
 		try {
 			Statement st = con1.createStatement();
 			st.executeUpdate(sql);
-			System.out.println("Employee added");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		pool.returnConnection(con1);
+		}
 		
 	}
-	
 }
+
