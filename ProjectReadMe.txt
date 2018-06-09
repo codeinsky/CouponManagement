@@ -35,4 +35,7 @@
  		- Exceptions change to origin  - NEED  
  		- wait and notify when all 10 connections a used - done 
  		- close connection with check that all 10 connections are returned - need 
- 	 * 
+ 	 * Data Base tables - done 
+ 	 * Beans - done 
+ 	 	- what Coupon collection to use 
+ 	 
