@@ -10,6 +10,10 @@ public class CuponSystemException extends Exception {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	public CuponSystemException(String string) {
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public synchronized Throwable fillInStackTrace() {
 		// TODO Auto-generated method stub
@@ -75,8 +79,10 @@ public class CuponSystemException extends Exception {
 		// TODO Auto-generated method stub
 		return super.toString();
 	}
-	public void devition() {
-		System.out.println("Pls do not 0 for devition");
-	}
+	
+	// test 
+	/*public void deviation() { 
+		System.out.println("Pls do not 0 for deviation");
+	}*/
 
 }

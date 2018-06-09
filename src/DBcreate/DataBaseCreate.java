@@ -3,21 +3,32 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import dbConnectionPool.ConnectionPool;
+
 public class DataBaseCreate {
 	public static void main(String[] args) {
 		
-	
-	String url = "jdbc:derby://10.13.1.1:1527/CuponSystemDB;create=true;";
-	try (Connection con = DriverManager.getConnection(url);) {
-		String sql = "Create table Cupon(ID INT , NAME VARCHAR(20))";
-		java.sql.Statement st = con.createStatement();
-		st.executeUpdate(sql);
-		System.out.println("test");
 
-	} catch (SQLException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} 
+		ConnectionPool pool = ConnectionPool.getConnectionPool();
+		Connection con = pool.getConnection();
+		// table creation 
+	//	String sql = "Create table Company(ID BIGINT NOT NULL , COMP_NAME VARCHAR(30), PASSWORD VARCHAR(10), EMAIL VARCHAR(20) , PRIMARY KEY(ID))";
+	//	String sql = "Create table Customer(ID BIGINT NOT NULL , CUST_NAME VARCHAR(30) , PASSWORD VARCHAR(10),PRIMARY KEY(ID))";
+	//	String sql = "Create table Coupon(ID BIGINT NOT NULL , TITLE VARCHAR(20) , START_DATE DATE, END_DATE DATE , AMOUNT INT , TYPE VARCHAR (20), MESSAGE VARCHAR(20) , PRICE BIGINT , IMAGE VARCHAR (50) ,PRIMARY KEY(ID))";
+	//	String sql = "Create table Customer_Coupon(Customer_ID BIGINT , Coupon_ID BIGINT , PRIMARY KEY(Customer_ID , Coupon_ID  ))";
+	String sql = "Create table Company_Coupon(Company_ID BIGINT , Cuopon_ID BIGINT,  PRIMARY KEY(Company_ID , Cuopon_ID))";
+		java.sql.Statement st;
+		try {
+			st = con.createStatement();
+			st.executeUpdate(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		pool.returnConnection(con);
+		System.out.println(pool.ConnectionAmoutCheck());
+
+
 
 }
 }

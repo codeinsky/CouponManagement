@@ -29,9 +29,10 @@
  									Project Progress 
 1.Phase 1
 	* connection pool - in progress  
-		- full Threads test - NEED 
+		- full Threads test - done  
 		- connection statement works - DONE 
 		- get /return - DONE  
  		- Exceptions change to origin  - NEED  
- 		- wait and notify when all 10 connections a used - NEED  
+ 		- wait and notify when all 10 connections a used - done 
+ 		- close connection with check that all 10 connections are returned - need 
  	 * 

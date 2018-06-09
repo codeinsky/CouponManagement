@@ -1,34 +1,33 @@
-package dbConnectionPool;
+package CuponTests;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Random;
 
 import dbConnectionPool.ConnectionPool;
 
-public class PoolCheck extends Thread {
+public class ClearTable implements Runnable{
 
 	@Override
 	public void run() {
-		
-		for (int i = 0; i < 10; i++) {
-			
-		
-		Random ran = new Random();
-		int id = ran.nextInt(100);
-		String sql = "INSERT INTO CUPON VALUES(" + id + ",'0 connections')";
+		// TODO Auto-generated method stub
+		ClearTable();
+	}
+	
+	public void ClearTable() {
+		String sql = "Delete  from cupon";
 		ConnectionPool pool = ConnectionPool.getConnectionPool();
 		Connection con1 = pool.getConnection();
 		try {
 			Statement st = con1.createStatement();
 			st.executeUpdate(sql);
+			System.out.println("Employee add");
+			pool.returnConnection(con1);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		pool.returnConnection(con1);
-		}
-		
 	}
-}
 
+
+}

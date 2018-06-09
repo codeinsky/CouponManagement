@@ -42,9 +42,7 @@ private Connection createConnection() {
 
 	//  Retrieving  connection from the pool  
  public synchronized  Connection getConnection() {
-	// Iterator<Connection> it = connectionPool.iterator(); need to ask Teacher
-	
-		 try {
+			 try {
 			 while (connectionPool.isEmpty()) {
 			 System.out.println("No connection left , wait");
 			wait();

@@ -1,11 +1,14 @@
-package dbConnectionPool;
+package CuponTests;
 
-
+import dbConnectionPool.ConnectionPool;
 
 public class ConTest {
 
 	public static void main(String[] args) {
 	ConnectionPool pool = ConnectionPool.getConnectionPool();
+	for (int i = 0; i < 10; i++) {
+		
+	
 	Thread tr1 = new PoolCheck();
 	Thread tr2 = new PoolCheck();
 	Thread tr3 = new PoolCheck();
@@ -29,7 +32,7 @@ public class ConTest {
 	tr10.start();
 	tr11.start();
 	
-	
+	}
 
 	}
 
