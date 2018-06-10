@@ -16,7 +16,7 @@ public class PoolCheck extends Thread {
 		
 		Random ran = new Random();
 		int id = ran.nextInt(100);
-		String sql = "INSERT INTO COUPON VALUES(" + id + ",'0 connections')";
+		String sql = "INSERT INTO COUPON(id , title) VALUES(" + id + ",' That is 10')";
 		ConnectionPool pool = ConnectionPool.getConnectionPool();
 		Connection con1 = pool.getConnection();
 		try {

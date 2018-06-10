@@ -38,4 +38,9 @@
  	 * Data Base tables - done 
  	 * Beans - done 
  	 	- what Coupon collection to use 
+ 	 	- enum type - to crate 
+ 	 * DAO Interfaces 
+ 	 	 - if need arguments in the Interfaces 
+ 	 	 - how to insert connection coupons 
+ 	 	 
  	 
