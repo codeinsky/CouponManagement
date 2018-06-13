@@ -3,6 +3,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import cuponSystemException.CuponSystemException;
 import dbConnectionPool.ConnectionPool;
 
 public class DataBaseCreate {
@@ -10,7 +11,12 @@ public class DataBaseCreate {
 		
 
 		ConnectionPool pool = ConnectionPool.getConnectionPool();
-		Connection con = pool.getConnection();
+		Connection con=null;
+		try {
+			con = pool.getConnection();
+		} catch (CuponSystemException e1) {
+			
+		}
 		// table creation 
 	// String sql = "Create table Company(ID BIGINT NOT NULL , COMP_NAME VARCHAR(30), PASSWORD VARCHAR(10), EMAIL VARCHAR(20) , PRIMARY KEY(ID))";
 	// String sql = "Create table Customer(ID BIGINT NOT NULL , CUST_NAME VARCHAR(30) , PASSWORD VARCHAR(10),PRIMARY KEY(ID))";

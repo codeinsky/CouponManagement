@@ -1,5 +1,5 @@
 package dbConnectionPool;
-
+import cuponSystemException.CuponSystemException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -7,50 +7,45 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-// single ton class pool of connections 
+
 public class ConnectionPool {
-	
-	// declaring all variables 
 private Set<Connection> connectionPool= new HashSet<>();
+private Set<Connection> PoolBackUP = connectionPool; // new reference for connection pool close  
 String url = "jdbc:derby://localhost:1527/CuponSystemDB;"; // database URL , driver , port 
 private int connectionCount = 10; 
-	
 private static ConnectionPool instance; // single ton instance of ConnectionPool
 // private single ton constructor 
 private  ConnectionPool() {
 		 
 		for (int i = 0; i < connectionCount ; i++) {
-			connectionPool.add(createConnection());
-			System.out.println("Connection " + i + " is created");
-			
+			try {
+				connectionPool.add(createConnection());
+			} catch (CuponSystemException e) {
+			}
 		}
 	}
-// 
 
 
-
-	// creating new connection 	
-private Connection createConnection() {
+	// CREATING NEW CONNECTION  	
+private Connection createConnection() throws CuponSystemException {
 	Connection connection = null ; 
 	try {Connection conn = DriverManager.getConnection(url); 
 		connection = conn; 
 	} catch (SQLException e) {
-		e.printStackTrace();
-	}
+		throw new CuponSystemException("DataBase connection initialization failed  " , e);
+		}
 	return connection;
 	}
 
-	//  Retrieving  connection from the pool  
- public synchronized  Connection getConnection() {
+	//  RETRIVING CONNCTION FROM THE POOL   
+ public synchronized  Connection getConnection() throws CuponSystemException {
 			 try {
 			 while (connectionPool.isEmpty()) {
-			 System.out.println("No connection left , wait");
+//	 System.out.println("No connection left , wait"); - used for Connection pool checks
 			wait();
-	
-			
 			 }
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			throw new CuponSystemException ("Data Base Connection Manager failed" , e);
 		}
 	 Iterator<Connection> it = connectionPool.iterator();
 	 Connection con = it.next();
@@ -59,7 +54,7 @@ private Connection createConnection() {
 	 return con;
  }
  
- 	// Returning connection from the pool 
+ 	// RETURNING CONNCTION BACK TO THE POOL 
  public synchronized void returnConnection(Connection con) {
 	 connectionPool.add(con);
 	 notifyAll();
@@ -70,19 +65,36 @@ private Connection createConnection() {
  return connectionPool.size();	 
  }
   
- //Closing all connections 
- public void closeConnections() {
+ //CLOSEING ALL CONNECTIONS 
+ public void closeConnections() throws CuponSystemException {
+	if (connectionPool.size()<10) {
+		System.out.println("Please do not shut down, still data transfering with data-base");
+		try {
+			System.out.println("Ten seconds delay to let all connection finish transfer data ");
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			throw new CuponSystemException ("Connection pool shut down failed", e );
+		}
+		for (Connection BuCon : PoolBackUP ) {
+			try {
+				BuCon.close();
+			} catch (SQLException e) {
+				throw new CuponSystemException("Connection close failed",e); 
+			}
+		}
+	}
+	else {
 	for (Connection con  : connectionPool) {
 		try {
 			System.out.println("Connection closed");
 			con.close();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new CuponSystemException("Connection close failed" , e);
 		}
 	}
 	System.out.println("All connections are closed");
 		}
- 
+ }
  
  
  //Single ton of a ConnectionPool Class create and return to the main class
@@ -93,7 +105,4 @@ private Connection createConnection() {
 	 } 
 	 return instance; 
  } 
- 
-
-
 }

@@ -2,16 +2,23 @@ package cuponSystemException;
 
 import java.io.PrintStream;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 
 public class CuponSystemException extends Exception {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-
-	public CuponSystemException(String string) {
-		// TODO Auto-generated constructor stub
+	
+	// Connection pool close exception 
+		public CuponSystemException(String string) {
+			System.out.println(string);
+		}
+    // INTERUPTED EXCEPTION 
+	public CuponSystemException(String string, InterruptedException e) {
+		System.out.println(string + e);
+	}
+	//SQL EXCEPTION 
+	public CuponSystemException(String string, SQLException e) {
+		System.out.println(string + e);
 	}
 
 	@Override
@@ -84,5 +91,8 @@ public class CuponSystemException extends Exception {
 	/*public void deviation() { 
 		System.out.println("Pls do not 0 for deviation");
 	}*/
-
+    
+	public void dataBase() {
+		System.out.println("Issue with Data Base connection ");
+	}
 }
