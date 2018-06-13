@@ -41,6 +41,11 @@ public class Company {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	@Override
+	public String toString() {
+		return "Company [id=" + id + ", compName=" + compName + ", password=" + password + ", email=" + email
+				+ ", coupon=" + coupon + "]";
+	}
 	
 
 }

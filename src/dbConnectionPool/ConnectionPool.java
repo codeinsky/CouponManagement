@@ -57,7 +57,7 @@ private Connection createConnection() throws CuponSystemException {
  public synchronized void returnConnection(Connection con) {
 	 connectionPool.add(con);
 	 notifyAll();
-	 
+	 System.out.println("There is " + connectionPool.size() + " after returning  ");
  }
  
  public int ConnectionAmoutCheck() {
@@ -67,7 +67,7 @@ private Connection createConnection() throws CuponSystemException {
  //CLOSEING ALL CONNECTIONS 
  public void closeConnections() throws CuponSystemException {
 	if (connectionPool.size()<10) {
-		System.out.println("Please do not shut down, still data transfering with data-base");
+		System.out.println("Please do not shut down, data still transfering with data-base");
 		try {
 			System.out.println("Ten seconds delay to let all connection finish transfer data ");
 			Thread.sleep(10000);
