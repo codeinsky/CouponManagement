@@ -25,7 +25,6 @@ private  ConnectionPool() {
 		}
 	}
 
-
 	// CREATING NEW CONNECTION  	
 private Connection createConnection() throws CuponSystemException {
 	Connection connection = null ; 
