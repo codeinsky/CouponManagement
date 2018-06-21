@@ -12,6 +12,8 @@
 - Project Steps 
  New step
  
+ - tomCat server start : systemctl  start tomcat8 
+ 
  
   								UBUNTO JDataBase connections steps:
  1. Server start 
