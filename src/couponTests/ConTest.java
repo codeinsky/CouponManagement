@@ -1,4 +1,4 @@
-package CuponTests;
+package couponTests;
 
 import dbConnectionPool.ConnectionPool;
 

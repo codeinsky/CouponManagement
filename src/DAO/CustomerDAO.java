@@ -2,7 +2,7 @@ package DAO;
 
 import java.util.Collection;
 
-import Beans.Customer;
+import beans.Customer;
 
 public interface CustomerDAO {
 	public void createCustomer(Customer Customer);

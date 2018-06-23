@@ -1,10 +1,10 @@
-package CuponTests;
+package couponTests;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import cuponSystemException.CuponSystemException;
+import couponSystemException.CuponSystemException;
 import dbConnectionPool.ConnectionPool;
 
 public class ClearTable implements Runnable{

@@ -1,18 +1,21 @@
-package Beans;
+package beans;
 
 import java.sql.Date;
 
 public class Coupon {
-	private Long id;
+	private long id;
 	private String title; 
 	private Date startDate;
 	private Date endDate;
 	private int amount; 
-	//CouponType type; // need to add enum 
+	// private need to add type
 	private String message;
 	private Double price;
 	private String image;
-	public Coupon(Long id, String title, Date startDate, Date endDate, int amount, String message, Double price,
+	public Coupon() {
+		
+	}
+	public Coupon(long id, String title, Date startDate, Date endDate, int amount, String message, Double price,
 			String image) {
 		super();
 		this.id = id;

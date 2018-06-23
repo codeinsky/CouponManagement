@@ -1,16 +1,17 @@
 package DAO;
 import java.util.Collection;
 
-import Beans.Company;
-import cuponSystemException.CuponSystemException;
+import beans.Company;
+import beans.Coupon;
+import couponSystemException.CuponSystemException;
 
 public interface CompanyDAO {
-	public void createCompany(Company Company) throws CuponSystemException; // if need to add argument 
+	public void createCompany(Company Company) throws CuponSystemException; 
 	public void removeCompany(Company Company) throws CuponSystemException;
-	public void updateCompany(Company Company);
-	public Company getCompany(Long id);
-	public Collection getAllCompanies();// need to insert Collections
-	public Collection getCoupons(); 
-	public Boolean Login(String compName, String Passowrd);
+	public void updateCompany(Company Company) throws CuponSystemException;
+	public Company getCompany(long id) throws CuponSystemException;
+	public Collection<Company> getAllCompanies() throws CuponSystemException ;
+	public Collection<Coupon> getCoupons(long id) throws CuponSystemException; 
+	public Boolean Login(String compName, String Passowrd) throws CuponSystemException;
 
 }

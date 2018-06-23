@@ -1,14 +1,18 @@
-package Beans;
+package beans;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
 public class Company {
-	long id; 
+	private long id; 
 	private String compName; 
 	private String password;
 	private String email;
 	private Collection<Coupon> coupon = new ArrayList<Coupon>(); // what list use ? 
+	
+	public Company() {
+		super();
+	}
 	public Company(long id, String compName, String password, String email) { // if need construct to collection ??
 		super();
 		this.id = id;

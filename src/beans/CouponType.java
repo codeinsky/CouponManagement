@@ -1,4 +1,4 @@
-package Beans;
+package beans;
 
 public enum CouponType {
    Resturans,
