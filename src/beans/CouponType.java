@@ -1,6 +1,6 @@
 package beans;
 
-public enum CouponType {
+public enum  CouponType {
    Resturans,
    Electricity,
    Food,

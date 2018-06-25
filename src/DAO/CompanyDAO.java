@@ -11,7 +11,7 @@ public interface CompanyDAO {
 	public void updateCompany(Company Company) throws CuponSystemException;
 	public Company getCompany(long id) throws CuponSystemException;
 	public Collection<Company> getAllCompanies() throws CuponSystemException ;
-	public Collection<Coupon> getCoupons(long id) throws CuponSystemException; 
 	public Boolean Login(String compName, String Passowrd) throws CuponSystemException;
+	Collection<Coupon> getCoupons(Company Compnay) throws CuponSystemException;
 
 }

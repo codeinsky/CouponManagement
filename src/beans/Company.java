@@ -8,7 +8,7 @@ public class Company {
 	private String compName; 
 	private String password;
 	private String email;
-	private Collection<Coupon> coupon = new ArrayList<Coupon>(); // what list use ? 
+	private Collection<Coupon> coupon = new ArrayList<Coupon>(); 
 	
 	public Company() {
 		super();

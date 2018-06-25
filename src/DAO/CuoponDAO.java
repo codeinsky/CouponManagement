@@ -7,11 +7,11 @@ import beans.CouponType;
 import couponSystemException.CuponSystemException;
 
 public interface CuoponDAO {
-	public void createCoupon(Coupon coupon) throws CuponSystemException;
-	public void removeCoupon(Coupon coupon) throws CuponSystemException;
-	public void updateCopupon(Coupon coupon) throws CuponSystemException;
-	public Coupon getCoupon(long id) throws CuponSystemException;
-	public Collection getAllCoupons() throws CuponSystemException;
-	public Collection getCouponByType(CouponType type);
+	public void createCoupon(Coupon coupon) throws CuponSystemException; // test done - works 
+	public void removeCoupon(Coupon coupon) throws CuponSystemException; // test done - works 
+	public void updateCopupon(Coupon coupon) throws CuponSystemException; // test done - works 
+	public Coupon getCoupon(long id) throws CuponSystemException; // test done - works
+	public Collection<Coupon> getAllCoupons() throws CuponSystemException; // test done - works ; 
+	public Collection<Coupon> getCouponByType(CouponType type) throws CuponSystemException; // test done  - works 
 
 }

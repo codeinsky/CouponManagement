@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Collection;
 import java.util.HashSet;
-
 import beans.Company;
 import beans.Coupon;
 import couponSystemException.CuponSystemException;
@@ -130,23 +129,32 @@ public class CompanyDBDAO implements CompanyDAO {
 
 	
 	
-	@Override // need run check with main , need to finish at home collection adding 
-	public Collection<Coupon>getCoupons(long id) throws CuponSystemException {
-		Collection<Coupon> couponList = new HashSet<Coupon>();
-		String query = "SELECT * FROM COUPON WHERE ID = " + id;
+	@Override 
+	// need run check with main , need to finish at home collection adding 
+	// need to test with main , very important ! ! ! ! ! ! ! ! ! ! ! ! !
+	public Collection<Coupon>getCoupons(Company company) throws CuponSystemException {
+		Collection<Coupon> couponList = new HashSet<Coupon>(); // Collection of coupons returned by the method 
+		Collection<Long> couponIdList = new HashSet<Long>(); //List with all coupons ID's belong to Company 
+		String queryJoinTable = "SELECT * FROM COMPANY_COUPON WHERE ID = " + company.getId() ;
 		ConnectionPool pool = ConnectionPool.getConnectionPool();
 		Connection con = pool.getConnection();
 		try {
 		Statement state  = con.createStatement();
-		ResultSet rs = state.executeQuery(query);
+		ResultSet rs = state.executeQuery(queryJoinTable);
 		while (rs.next()) {
-			couponList.add(new Coupon(id, query, null, null, 0, query, null, query));
+			couponIdList.add(rs.getLong("COUPON_ID"));
 		}
 		} catch (SQLException e) {
-			throw new CuponSystemException("Failed to get Cupons from Data Base", e);
+			throw new CuponSystemException("Failed to get Coupons from Data Base", e);
+		} finally {pool.returnConnection(con);}
+		// getting coupon objects from Coupon DB table per  Company 
+		for (long id : couponIdList) {
+			CuoponDBDAO getCop = new CuoponDBDAO();
+			couponList.add(getCop.getCoupon(id));
+			}
+		if (couponList.size()==0) {
+			System.out.println("No any Coupons associated with Company :" + company.getCompName());
 		}
-		
-		pool.returnConnection(con);
 		return couponList;
 		
 	}
@@ -179,10 +187,11 @@ public class CompanyDBDAO implements CompanyDAO {
 			}
 		} catch (SQLException e) {
 			throw new CuponSystemException ("Failed to retrive password from DATA BASE" , e);
-		}
-		pool.returnConnection(con); // to add FINALY to all the methods
+		} finally {pool.returnConnection(con);}
 		return result ;
 	}
+
+	
 
 	
 }

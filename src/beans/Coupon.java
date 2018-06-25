@@ -8,14 +8,14 @@ public class Coupon {
 	private Date startDate;
 	private Date endDate;
 	private int amount; 
-	// private need to add type
+	private CouponType type;
 	private String message;
 	private Double price;
 	private String image;
+	
 	public Coupon() {
-		
 	}
-	public Coupon(long id, String title, Date startDate, Date endDate, int amount, String message, Double price,
+	public Coupon(long id, String title, Date startDate, Date endDate, int amount ,CouponType type , String message, Double price,
 			String image) {
 		super();
 		this.id = id;
@@ -23,9 +23,11 @@ public class Coupon {
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.amount = amount;
+		this.type = type;
 		this.message = message;
 		this.price = price;
 		this.image = image;
+		
 	}
 	public Long getId() {
 		return id;
@@ -75,10 +77,18 @@ public class Coupon {
 	public void setImage(String image) {
 		this.image = image;
 	}
+	
+	public CouponType getType() {
+		return type;
+	}
+	public void setType(CouponType type) {
+		this.type = type;
+	}
 	@Override
 	public String toString() {
 		return "Coupon [id=" + id + ", title=" + title + ", startDate=" + startDate + ", endDate=" + endDate
-				+ ", amount=" + amount + ", message=" + message + ", price=" + price + ", image=" + image + "]";
+				+ ", amount=" + amount + ", type=" + type + ", message=" + message + ", price=" + price + ", image="
+				+ image + "]";
 	}
 	
 
