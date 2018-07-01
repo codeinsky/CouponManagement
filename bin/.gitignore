@@ -1,14 +1,5 @@
-<<<<<<< HEAD
-=======
-/CuponTests/
->>>>>>> branch 'master' of https://github.com/codeinsky/CuponManagment.git
 /DAO/
-/DBcreate/
-/Beans/
-/couponSystemException/
-/dbConnectionPool/
-/dBcreate/
-/beans/
 /couponTests/
-/Facades/
+/beans/
 /facades/
+/dBcreate/

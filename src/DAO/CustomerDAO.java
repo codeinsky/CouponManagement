@@ -6,10 +6,10 @@ import beans.Customer;
 import couponSystemException.CuponSystemException;
 
 public interface CustomerDAO {
-	public void createCustomer(Customer Customer) throws CuponSystemException;
-	public void removeCustomer(Customer Customer) throws CuponSystemException;
-	public void updateCustomer(Customer Customer) throws CuponSystemException;
-	public Customer getCustomer(Long id) throws CuponSystemException;
-	public Collection<Customer> getAllCustomers() throws CuponSystemException;
-	public boolean login(String custName,String password);
+	public void createCustomer(Customer Customer) throws CuponSystemException; // test done , works 
+	public void removeCustomer(Customer Customer) throws CuponSystemException; // test done . works 
+	public void updateCustomer(Customer Customer) throws CuponSystemException; // test done , works 
+	public Customer getCustomer(long id) throws CuponSystemException; // test done , works 
+	public Collection<Customer> getAllCustomers() throws CuponSystemException; // test done , works 
+	public boolean login(String custName,String password); // not used yet 
 }

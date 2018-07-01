@@ -33,13 +33,13 @@ public class CustomerDBDAO implements CustomerDAO {
 	public void removeCustomer(Customer customer) throws CuponSystemException {
 		ConnectionPool pool = ConnectionPool.getConnectionPool();
 		Connection con = pool.getConnection();
-		String sql = "DELETE * FROM CUSTOMER WHERE ID=" + customer.getId(); 
+		String sql = "DELETE  FROM CUSTOMER WHERE ID=" + customer.getId(); 
 		Statement st;
 		try {
 			st = con.createStatement();
 			st.executeUpdate(sql);
 		} catch (SQLException e) {
-			throw new CuponSystemException("Failed to delete Customer with id = " + customer.getId() , e);
+			throw new CuponSystemException("Failed to delete Customer with id = " + customer.getId() + " " , e);
 		} finally {pool.returnConnection(con);}
 
 		
@@ -51,7 +51,7 @@ public class CustomerDBDAO implements CustomerDAO {
 	public void updateCustomer(Customer customer) throws CuponSystemException {
 		ConnectionPool pool = ConnectionPool.getConnectionPool();
 		Connection con = pool.getConnection();
-		String sql = "UPDATE COSTOMER  SET  ID = ID ? , CUST_NAME  = ? , PASSWORD = ? ,  WHERE ID= ?" ; 
+		String sql = "UPDATE CUSTOMER  SET  ID =  ? , CUST_NAME  = ? , PASSWORD = ?  WHERE ID= "  + customer.getId() ; 
 		try {
 		PreparedStatement  st = con.prepareStatement(sql);
 		st.setLong(1, customer.getId());
@@ -59,12 +59,12 @@ public class CustomerDBDAO implements CustomerDAO {
 		st.setString(3, customer.getPassword());
 		st.executeUpdate();
 		} catch (SQLException e) {
-		throw new CuponSystemException("Failed to updated customer with id = " + customer.getId() , e);
-		} finally {pool.getConnection();}
+		throw new CuponSystemException("Failed to updated customer with id = " + customer.getId() + " ",e);
+		} finally {pool.returnConnection(con);}
 	}
 
 	@Override
-	public Customer getCustomer(Long id) throws CuponSystemException {
+	public Customer getCustomer(long id) throws CuponSystemException {
 		Customer customer = new Customer(id, null, null);
 		ConnectionPool pool = ConnectionPool.getConnectionPool();
 		String query = "SELECT * FROM CUSTOMER WHERE id = " + id ; 

@@ -30,8 +30,7 @@ public class CompanyDBDAO implements CompanyDAO {
 				state.executeUpdate();
 			} catch (SQLException e) {
 				throw new CuponSystemException ("Failed to add ne compnay in DataBase " , e);
-			}
-			pool.returnConnection(con);
+			}finally {pool.returnConnection(con);}
 		
 		
 		
@@ -51,11 +50,7 @@ public class CompanyDBDAO implements CompanyDAO {
 			
 		} catch (SQLException e) {
 			throw new CuponSystemException ("Failed to remove the company", e );
-		}
-		pool.returnConnection(con);
-		
-		
-		
+		} finally {pool.returnConnection(con);}
 		
 	}
 
@@ -75,7 +70,7 @@ public class CompanyDBDAO implements CompanyDAO {
 		} catch (SQLException e) {
 			throw new CuponSystemException ("Failed to update the Copmany" , e);
 		}
-		pool.returnConnection(con);
+		finally {pool.returnConnection(con);}
 	}
 
 	
@@ -103,7 +98,7 @@ public class CompanyDBDAO implements CompanyDAO {
 				e.printStackTrace();
 			throw new CuponSystemException ("Failed to parse DataBase Result ");
 			}
-		pool.returnConnection(con);
+		finally {pool.returnConnection(con);}
 		return company;
 	}
 
@@ -123,7 +118,7 @@ public class CompanyDBDAO implements CompanyDAO {
 		} catch (SQLException e) {
 			throw new CuponSystemException ("Failed to get all Companies from DATA BASE" , e);
 		}
-		pool.returnConnection(con);
+		finally{pool.returnConnection(con);}
 		return companyList;
 	}
 
@@ -155,7 +150,7 @@ public class CompanyDBDAO implements CompanyDAO {
 		if (couponList.size()==0) {
 			System.out.println("No any Coupons associated with Company :" + company.getCompName());
 		}
-		return couponList;
+		return couponList ;
 		
 	}
 

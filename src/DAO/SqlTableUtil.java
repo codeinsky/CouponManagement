@@ -7,11 +7,11 @@ import java.sql.SQLException;
 import couponSystemException.CuponSystemException;
 import dbConnectionPool.ConnectionPool;
 
-public class SqlTableCheck {
+public class SqlTableUtil {
 	
-	public static boolean ifExsist(String sqlTable, String Coulum , String Item) throws CuponSystemException {
+	public static boolean ifExsist(String sqlTable, String Column , String Item) throws CuponSystemException {
 		boolean result = false;
-		String sql = "SELECT * FROM " + sqlTable + "  WHERE " + Coulum +" =  ?";
+		String sql = "SELECT * FROM " + sqlTable + "  WHERE " + Column +" =  ?";
 		ConnectionPool pool = ConnectionPool.getConnectionPool();
 		Connection con  = pool.getConnection();
 		try {
@@ -33,4 +33,17 @@ public class SqlTableCheck {
 		return result;
 
 }
+	public static void removeWhere(String sqlTable , String column , long id ) throws CuponSystemException {
+		String sql = "DELET FROM " + sqlTable + "WHERE" + column +" = ?";
+		ConnectionPool pool = ConnectionPool.getConnectionPool();
+		Connection con = pool.getConnection();
+		try {
+		PreparedStatement st = con.prepareStatement(sql);
+		st.setLong(1, id);
+			st.executeUpdate();
+		} catch (SQLException e) {
+			throw new CuponSystemException ("Failed to delete neede coupon" ,e );
+		}finally {pool.returnConnection(con);}
+		
+	}	
 }
