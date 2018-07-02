@@ -101,7 +101,7 @@ public class AdminFacade {
 			}
 		
 	}
-	// need check 
+	// need TEST  
 	public void RemoveCustomer(Customer customer) {
 	// all coupons purchased by the Customer need to be "released" from the table Customer-Coupon
 	try {
@@ -112,16 +112,40 @@ public class AdminFacade {
 	}
 	
 	}
-	// need to complete 
+	// need test 
 	public void UpdateCustomerDetails(Customer customer) {
+		try {
+			// checks if customer already exists and if the name is the same 
+			Customer CustomerpriorUpdate = customerDAO.getCustomer(customer.getId());
+			//check if Admin doesn't tries to change the name 
+			if (customer.getCustName().equals(CustomerpriorUpdate.getCustName())){ 
+				customerDAO.updateCustomer(customer);
+			}
+			else {
+				throw new CuponSystemException("Customer name can't be changed") ; 
+			}
+		} catch (CuponSystemException e) {
+			e.getMessage();
 		}
-	// need complete
+		}
+	// need test 
 	public Collection<Customer> GetCustomerList(){
-		return null;
+		Collection<Customer> customerList = null;
+		try {
+			customerList = customerDAO.getAllCustomers();
+		} catch (CuponSystemException e) {
+			e.getMessage(); }
+		return  customerList;
 	}
-	// need complete
-	public Customer GetCustomer() {
-		return null;
+	// need test 
+	public Customer GetCustomer(long id) {
+		Customer customer = null;
+		try {
+			customer = customerDAO.getCustomer(id);
+		} catch (CuponSystemException e) {
+			e.getMessage();
+		}
+		return customer;
 	}
 }
 
