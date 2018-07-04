@@ -4,6 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Collection;
+import java.util.HashSet;
+
+import org.apache.derby.tools.sysinfo;
+
 import couponSystemException.CuponSystemException;
 import dbConnectionPool.ConnectionPool;
 
@@ -34,7 +39,7 @@ public class SqlTableUtil {
 
 }
 	public static void removeWhere(String sqlTable , String column , long id ) throws CuponSystemException {
-		String sql = "DELET FROM " + sqlTable + "WHERE" + column +" = ?";
+		String sql = "DELETE FROM " + sqlTable + "WHERE" + column + "=?";
 		ConnectionPool pool = ConnectionPool.getConnectionPool();
 		Connection con = pool.getConnection();
 		try {
@@ -42,8 +47,30 @@ public class SqlTableUtil {
 		st.setLong(1, id);
 			st.executeUpdate();
 		} catch (SQLException e) {
-			throw new CuponSystemException ("Failed to delete neede coupon" ,e );
+			throw new CuponSystemException ("Failed to delete needed coupon " ,e );
 		}finally {pool.returnConnection(con);}
 		
 	}	
+	
+	public static  Collection<Long> getAllCouponsBelongTo(String getColumn, String sqlTable,String whereColumn , long id) throws CuponSystemException  {
+	Collection<Long> couponsList = new HashSet<Long>();
+	ConnectionPool pool = ConnectionPool.getConnectionPool();
+	Connection con = pool.getConnection();
+	try {
+		String sql  = "SELECT "+ getColumn +" FROM " +  sqlTable + "WHERE " + whereColumn + " = ?";
+		PreparedStatement st = con.prepareStatement(sql);
+		st.setLong(1, 15);
+		ResultSet rs = st.executeQuery();
+		while (rs.next()) {
+			couponsList.add(rs.getLong(getColumn));
+			} }catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+	 
+
+	
+	return couponsList;
+	}
 }

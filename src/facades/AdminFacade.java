@@ -15,8 +15,8 @@ public class AdminFacade {
 	CompanyDBDAO  companyDAO = new CompanyDBDAO();
 	CustomerDBDAO customerDAO = new CustomerDBDAO();
 	CuoponDBDAO  couponDAO = new CuoponDBDAO();
-	
-	public void CreateCompany(Company company) {
+	// CreateCompany tested and works 
+	public void CreateCompany(Company company) { 
 		// check if the Company name already exists 
 		try {
 			if (SqlTableUtil.ifExsist("COMPANY", "COMP_NAME", company.getCompName())) {           // need test
@@ -49,8 +49,8 @@ public class AdminFacade {
 		}
 	}
 	
-	
-	public void CompanyDetailsUpdate(Company company) {
+	// tested and works 
+	public void CompanyDetailsUpdate(Company company) { 
 		// COMPANY NAME CAN NOT BE CHANGED 
 		try {
 		    // checking if Admin tries to change the name by mistake 
@@ -64,7 +64,7 @@ public class AdminFacade {
 			 catch (CuponSystemException e) {
 				 e.getMessage();}
 }
-		//need TEST 
+		//tested and works 
 	public Collection<Company> GetAllCompanies () {
 		Collection<Company> companies = null;
 		try {
@@ -75,7 +75,7 @@ public class AdminFacade {
 		return companies;
 	}
 	
-	 // need TEST 
+	 // tested and works 
 	public Company GetCompany(long id) {
 		Company company = null;
 		try {
@@ -86,7 +86,7 @@ public class AdminFacade {
 		return company;
 	}
 	
-	// need TEST 
+	// Tested and works 
 	public void AddCustomer(Customer customer) {
 		// need check if there is already customer with same name 
 		try {
@@ -101,7 +101,7 @@ public class AdminFacade {
 			}
 		
 	}
-	// need TEST  
+	// Need  test when coupon purchase will be ready 
 	public void RemoveCustomer(Customer customer) {
 	// all coupons purchased by the Customer need to be "released" from the table Customer-Coupon
 	try {
@@ -112,7 +112,7 @@ public class AdminFacade {
 	}
 	
 	}
-	// need test 
+	// Works , test done 
 	public void UpdateCustomerDetails(Customer customer) {
 		try {
 			// checks if customer already exists and if the name is the same 
@@ -128,7 +128,7 @@ public class AdminFacade {
 			e.getMessage();
 		}
 		}
-	// need test 
+	// test done , works 
 	public Collection<Customer> GetCustomerList(){
 		Collection<Customer> customerList = null;
 		try {
@@ -137,7 +137,7 @@ public class AdminFacade {
 			e.getMessage(); }
 		return  customerList;
 	}
-	// need test 
+	// test done , works 
 	public Customer GetCustomer(long id) {
 		Customer customer = null;
 		try {
