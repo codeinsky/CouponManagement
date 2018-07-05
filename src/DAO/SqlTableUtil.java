@@ -39,12 +39,12 @@ public class SqlTableUtil {
 
 }
 	public static void removeWhere(String sqlTable , String column , long id ) throws CuponSystemException {
-		String sql = "DELETE FROM " + sqlTable + "WHERE" + column + "=?";
+		String sql = "DELETE FROM " + sqlTable + " WHERE " + column + " =?";
 		ConnectionPool pool = ConnectionPool.getConnectionPool();
 		Connection con = pool.getConnection();
 		try {
-		PreparedStatement st = con.prepareStatement(sql);
-		st.setLong(1, id);
+			PreparedStatement st = con.prepareStatement(sql);
+			st.setLong(1, id);
 			st.executeUpdate();
 		} catch (SQLException e) {
 			throw new CuponSystemException ("Failed to delete needed coupon " ,e );
@@ -52,25 +52,20 @@ public class SqlTableUtil {
 		
 	}	
 	
-	public static  Collection<Long> getAllCouponsBelongTo(String getColumn, String sqlTable,String whereColumn , long id) throws CuponSystemException  {
+	public static  Collection<Long> getCouponsBelongTo(String getColumn, String sqlTable,String whereColumn , long id) throws CuponSystemException  {
 	Collection<Long> couponsList = new HashSet<Long>();
 	ConnectionPool pool = ConnectionPool.getConnectionPool();
 	Connection con = pool.getConnection();
 	try {
-		String sql  = "SELECT "+ getColumn +" FROM " +  sqlTable + "WHERE " + whereColumn + " = ?";
+		String sql  = "SELECT "+ getColumn +" FROM " +  sqlTable + " WHERE " + whereColumn + " = ?";
 		PreparedStatement st = con.prepareStatement(sql);
-		st.setLong(1, 15);
+		st.setLong(1, id);
 		ResultSet rs = st.executeQuery();
 		while (rs.next()) {
 			couponsList.add(rs.getLong(getColumn));
 			} }catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		
-	 
-
-	
-	return couponsList;
+				throw new CuponSystemException ("Failed to execute the SQL query",e );
+			} finally {pool.returnConnection(con);}
+		return couponsList;
 	}
 }
