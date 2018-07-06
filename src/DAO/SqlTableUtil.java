@@ -46,7 +46,7 @@ public class SqlTableUtil {
 			PreparedStatement st = con.prepareStatement(sql);
 			st.setLong(1, id);
 			st.executeUpdate();
-		} catch (SQLException e) {
+		} catch (SQLException e) { e.printStackTrace();
 			throw new CuponSystemException ("Failed to delete needed coupon " ,e );
 		}finally {pool.returnConnection(con);}
 		
