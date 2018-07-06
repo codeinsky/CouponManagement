@@ -39,7 +39,9 @@ public class SqlTableUtil {
 
 }
 	public static void removeWhere(String sqlTable , String column , long id ) throws CuponSystemException {
-		String sql = "DELETE FROM " + sqlTable + " WHERE " + column + " =?";
+		String sql = "DELETE FROM CUSTOMER_COUPON WHERE COUPON_ID = ?";
+		//String sql = "DELETE FROM " + sqlTable + " WHERE " + column + " = ?";
+		System.out.println(sql);
 		ConnectionPool pool = ConnectionPool.getConnectionPool();
 		Connection con = pool.getConnection();
 		try {

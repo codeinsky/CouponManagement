@@ -16,10 +16,10 @@ import facades.CompanyFacade;
 public class CompanyTest {
 	public static void main(String[] args) throws CuponSystemException, SQLException {
 		CuoponDBDAO cop = new CuoponDBDAO();
-		Coupon mycop = cop.getCoupon(1);
+		Coupon mycop = cop.getCoupon(4);
 		mycop.setPrice(40.20);
 		System.out.println(mycop);
-		CompanyFacade comp = new CompanyFacade(1);
+		CompanyFacade comp = new CompanyFacade(3);
 		comp.UpdqateCoupon(mycop);
 		comp.removeCoupon(mycop);
 		

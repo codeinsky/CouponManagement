@@ -42,7 +42,7 @@ public class CompanyFacade {
 				else {System.out.println("Coupon you want to remove does not belong to your company");}
 				
 	} catch (CuponSystemException e) {
-		e.getMessage();
+		e.printStackTrace(); e.getMessage();
 	}
 			
 }
