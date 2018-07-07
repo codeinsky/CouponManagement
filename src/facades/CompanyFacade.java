@@ -53,7 +53,7 @@ public class CompanyFacade {
 		// need check if that coupon belongs to the company
 		Collection<Long> couponsIds ;
 		try {
-			couponsIds = SqlTableUtil.getCouponsBelongTo("CUOPON_ID", "COMPANY_COUPON", "COMPANY_ID", companyIdLogged);
+			couponsIds = SqlTableUtil.getCouponsBelongTo("COUPON_ID", "COMPANY_COUPON", "COMPANY_ID", companyIdLogged);
 			System.out.println(couponsIds);
 			// checks if the coupon belongs to the company 
 			if (couponsIds.contains(coupon.getId())) { 
@@ -70,6 +70,50 @@ public class CompanyFacade {
 		
 		
 	}
+	// done and works 
+	public Coupon GetCouponById (long id) {
+		Coupon coupon = null;
+		Collection<Long> couponsIds ;
+		try {
+			couponsIds = SqlTableUtil.getCouponsBelongTo("COUPON_ID", "COMPANY_COUPON", "COMPANY_ID", companyIdLogged);
+			System.out.println(couponsIds);
+			// checks if the coupon belongs to the company 
+			if (couponsIds.contains(id)) { 
+				coupon = couponDAO.getCoupon(id);
+			}
+			else {
+				System.out.println("This coupon doesn't belong to your Company");
+			}
+				} catch (CuponSystemException e) {
+					e.getMessage();
+				}
+		return coupon;
+		
+	}
 	
+	public Collection<Coupon> GetAllCoupons() {
+		Collection<Coupon> allCoupons = null;
+		Collection<Long> couponsIds ;
+		try {
+			couponsIds = SqlTableUtil.getCouponsBelongTo("COUPON_ID", "COMPANY_COUPON", "COMPANY_ID", companyIdLogged);
+			System.out.println("Coupns belong to your Company are: " + couponsIds);
+			if (couponsIds.size()==0) {
+				System.out.println("There are no any coupons associated to your Compnay");
+			}
+			else {
+				for (long id : couponsIds) {
+					allCoupons.add(couponDAO.getCoupon(id));
+				}
+					}
+				
+			
+				} catch (CuponSystemException e) {
+					e.getMessage();
 	
+		
+	
+	}
+	
+		return allCoupons;
+}
 }
