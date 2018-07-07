@@ -39,9 +39,7 @@ public class SqlTableUtil {
 
 }
 	public static void removeWhere(String sqlTable , String column , long id ) throws CuponSystemException {
-		String sql = "DELETE FROM CUSTOMER_COUPON WHERE COUPON_ID = ?";
-		//String sql = "DELETE FROM " + sqlTable + " WHERE " + column + " = ?";
-		System.out.println(sql);
+		String sql = "DELETE FROM " + sqlTable + " WHERE " + column + " = ?";
 		ConnectionPool pool = ConnectionPool.getConnectionPool();
 		Connection con = pool.getConnection();
 		try {
@@ -66,7 +64,7 @@ public class SqlTableUtil {
 		while (rs.next()) {
 			couponsList.add(rs.getLong(getColumn));
 			} }catch (SQLException e) {
-				throw new CuponSystemException ("Failed to execute the SQL query",e );
+				throw new CuponSystemException ("Failed to execute the SQL query ",e );
 			} finally {pool.returnConnection(con);}
 		return couponsList;
 	}

@@ -30,7 +30,7 @@ public class CompanyFacade {
 		Collection<Long> couponsIds ;
 		try {
 			// check if coupon belongs to the company before remove 
-			couponsIds = SqlTableUtil.getCouponsBelongTo("CUOPON_ID", "COMPANY_COUPON", "COMPANY_ID", companyIdLogged);
+			couponsIds = SqlTableUtil.getCouponsBelongTo("COUPON_ID", "COMPANY_COUPON", "COMPANY_ID", companyIdLogged);
 			
 				if (couponsIds.contains(coupon.getId())) { // the coupon exists , removal will be execute 
 					// removes all purchased coupons from CUSTOMER_COUPON table 
@@ -42,7 +42,8 @@ public class CompanyFacade {
 				else {System.out.println("Coupon you want to remove does not belong to your company");}
 				
 	} catch (CuponSystemException e) {
-		e.printStackTrace(); e.getMessage();
+		e.printStackTrace(); 
+		e.getMessage();
 	}
 			
 }
