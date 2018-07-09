@@ -16,12 +16,9 @@ import facades.CompanyFacade;
 public class CompanyTest {
 	public static void main(String[] args) throws CuponSystemException, SQLException {
 		CuoponDBDAO cop = new CuoponDBDAO();
-		Coupon mycop = cop.getCoupon(1);
-		mycop.setPrice(40.20);
-		System.out.println(mycop);
-		CompanyFacade comp = new CompanyFacade(1);
-		comp.UpdqateCoupon(mycop);
-		comp.removeCoupon(mycop);
+		CompanyFacade comp = new CompanyFacade(4);
+		System.out.println(comp.GetAllCoupons());
+	 
 		
 		
 		

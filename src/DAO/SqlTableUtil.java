@@ -9,6 +9,7 @@ import java.util.HashSet;
 
 import org.apache.derby.tools.sysinfo;
 
+import beans.Coupon;
 import couponSystemException.CuponSystemException;
 import dbConnectionPool.ConnectionPool;
 
@@ -39,7 +40,7 @@ public class SqlTableUtil {
 
 }
 	public static void removeWhere(String sqlTable , String column , long id ) throws CuponSystemException {
-		String sql = "DELETE FROM " + sqlTable + " WHERE " + column + " =?";
+		String sql = "DELETE FROM " + sqlTable + " WHERE " + column + " = ?";
 		ConnectionPool pool = ConnectionPool.getConnectionPool();
 		Connection con = pool.getConnection();
 		try {
@@ -64,8 +65,16 @@ public class SqlTableUtil {
 		while (rs.next()) {
 			couponsList.add(rs.getLong(getColumn));
 			} }catch (SQLException e) {
-				throw new CuponSystemException ("Failed to execute the SQL query",e );
+				throw new CuponSystemException ("Failed to execute the SQL query ",e );
 			} finally {pool.returnConnection(con);}
 		return couponsList;
 	}
+	
+	public static Collection<Coupon> GetCouponSelected(long id , String select , String refernce) {
+		Collection<Coupon> selectedCoupons = null;
+		
+		return selectedCoupons;
+	}
+	
+	
 }
