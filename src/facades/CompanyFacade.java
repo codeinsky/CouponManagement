@@ -92,7 +92,7 @@ public class CompanyFacade {
 		return coupon;
 		
 	}
-	// need test 
+	// Test done - works 
 	public Collection<Coupon> GetAllCoupons() {
 		Collection<Coupon> allCoupons = new HashSet<Coupon>();
 		Collection<Long> couponsIds ;
@@ -115,6 +115,16 @@ public class CompanyFacade {
 			return allCoupons;
 		}
 	
+	// Get list of coupons sorted by : TYPE , PRICE LESS THEN ,  DATE BEFORE 'yyyy-mm-dd'
+	public Collection<Coupon> SortCouponBy (String select, String refernce){
+		Collection<Coupon> selectedCouponsBy = null;
+		try {
+			selectedCouponsBy = SqlTableUtil.GetCouponSelected(companyIdLogged, select, refernce);
+		} catch (CuponSystemException e) {
+			e.getMessage();
+		}
+		return selectedCouponsBy;
+	}
 	
 	
 }

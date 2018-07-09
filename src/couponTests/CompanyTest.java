@@ -1,6 +1,6 @@
 package couponTests;
 
-import java.sql.Date;
+
 import java.sql.SQLException;
 import DAO.CompanyDBDAO;
 import DAO.CuoponDBDAO;
@@ -18,6 +18,10 @@ public class CompanyTest {
 		CuoponDBDAO cop = new CuoponDBDAO();
 		CompanyFacade comp = new CompanyFacade(4);
 		System.out.println(comp.GetAllCoupons());
+		System.out.println(comp.SortCouponBy("Type", "Health"));
+		System.out.println(comp.SortCouponBy("Price", "222.1"));
+		System.out.println(comp.SortCouponBy("Date", "'2005-10-06'"));
+		
 	 
 		
 		

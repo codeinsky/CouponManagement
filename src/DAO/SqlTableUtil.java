@@ -4,12 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Collection;
 import java.util.HashSet;
-
-import org.apache.derby.tools.sysinfo;
-
 import beans.Coupon;
+import beans.CouponType;
 import couponSystemException.CuponSystemException;
 import dbConnectionPool.ConnectionPool;
 
@@ -70,8 +69,55 @@ public class SqlTableUtil {
 		return couponsList;
 	}
 	
-	public static Collection<Coupon> GetCouponSelected(long id , String select , String refernce) {
-		Collection<Coupon> selectedCoupons = null;
+	public static Collection<Coupon> GetCouponSelected(long id , String select , String refernce) throws CuponSystemException {
+		Collection<Coupon> selectedCoupons = new HashSet<Coupon>();
+		String sql = null; 
+		switch(select) {
+		case "Type" :  sql = "SELECT * FROM COUPON " + 
+				"INNER JOIN COMPANY_COUPON " + 
+				"ON Coupon.ID=company_coupon.COUPON_ID " + 
+				"WHERE TYPE = '" + refernce +"' " + 
+				"AND company_id = " + id;
+			break;
+			
+		case "Price":  sql = "SELECT * FROM COUPON " + 
+				"INNER JOIN COMPANY_COUPON " + 
+				"ON Coupon.ID=company_coupon.COUPON_ID " + 
+				"WHERE PRICE < " + refernce + 
+				"AND company_id = " + id;
+			break;
+			
+		case "Date" :  sql = "SELECT * FROM COUPON " + 
+				"INNER JOIN COMPANY_COUPON " + 
+				"ON Coupon.ID=company_coupon.COUPON_ID " + 
+				"WHERE END_DATE < " + refernce + 
+				"AND company_id = " + id;
+			break;
+		
+		}
+		
+		ConnectionPool pool = ConnectionPool.getConnectionPool();
+		Connection con = pool.getConnection();
+		try {
+		Statement st = con.createStatement();
+		ResultSet rs = st.executeQuery(sql);
+		while (rs.next()) {
+				selectedCoupons.add(new Coupon(
+						rs.getLong("ID"),
+						rs.getString("TITLE"),
+						rs.getDate("START_DATE"),
+						rs.getDate("END_DATE"),
+						rs.getInt("AMOUNT"),
+						CouponType.valueOf(rs.getString("TYPE")),
+						rs.getString("MESSAGE"),
+						rs.getDouble("PRICE"),
+						rs.getString("IMAGE")
+						));
+			} 
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}finally {pool.returnConnection(con);}
 		
 		return selectedCoupons;
 	}
