@@ -20,12 +20,12 @@ public class SqlTableUtil {
 		ConnectionPool pool = ConnectionPool.getConnectionPool();
 		Connection con  = pool.getConnection();
 		try {
-		PreparedStatement st = con.prepareStatement(sql);
-		st.setString(1, Item);
-		ResultSet rs;
-		rs = st.executeQuery();
-		if (rs.next()) {
-		result = true;
+			PreparedStatement st = con.prepareStatement(sql);
+			st.setString(1, Item);
+			ResultSet rs;
+			rs = st.executeQuery();
+			if (rs.next()) {
+				result = true;
 		}
 		else {
 			result = false;
@@ -122,5 +122,18 @@ public class SqlTableUtil {
 		return selectedCoupons;
 	}
 	
+	public static void buyCoupon(String customerId , String couponId ) throws CuponSystemException {
+		ConnectionPool pool = ConnectionPool.getConnectionPool();
+		Connection con = pool.getConnection();
+		try {
+		String sql = "INSERT INTO CUSTOMER_COUPON VALUES("+customerId +"," + couponId + ")";
+		Statement st = con.createStatement();
+			st.executeUpdate(sql);
+		} catch (SQLException e) {
+			throw new CuponSystemException("Failed updateing coupon purchase " , e);
+		}
+		
+		
+	}
 	
 }

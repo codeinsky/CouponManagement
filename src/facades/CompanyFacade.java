@@ -115,7 +115,7 @@ public class CompanyFacade {
 			return allCoupons;
 		}
 	
-	// Get list of coupons sorted by : TYPE , PRICE LESS THEN ,  DATE BEFORE 'yyyy-mm-dd'
+	// Get list of coupons sorted by : TYPE or PRICE LESS THEN or DATE BEFORE 'yyyy-mm-dd'
 	public Collection<Coupon> SortCouponBy (String select, String refernce){
 		Collection<Coupon> selectedCouponsBy = null;
 		try {
