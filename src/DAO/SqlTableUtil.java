@@ -93,6 +93,27 @@ public class SqlTableUtil {
 				"WHERE END_DATE < " + refernce + 
 				"AND company_id = " + id;
 			break;
+			
+		case "customerCouponsByPrice" :  sql = "SELECT * FROM COUPON " + 
+				"INNER JOIN CUSTOMER_COUPON " + 
+				"ON Coupon.ID=customer_coupon.COUPON_ID " + 
+				"WHERE PRICE < " + refernce + 
+				"AND customer_id = " + id;
+			break; 
+			
+		case "customerCouponsByDate" : sql = "SELECT * FROM COUPON " + 
+				"INNER JOIN CUSTOMER_COUPON " + 
+				"ON Coupon.ID=customer_coupon.COUPON_ID " + 
+				"WHERE END_DATE < " + refernce + 
+				"AND customer_id = " + id;
+			break;
+			
+		case "customerCouponsByType" : sql = "SELECT * FROM COUPON " + 
+				"INNER JOIN CUSTOMER_COUPON " + 
+				"ON Coupon.ID=customer_coupon.COUPON_ID " + 
+				"WHERE TYPE = '" + refernce +"' " + 
+				"AND customer_id = " + id;
+			break;
 		
 		}
 		
@@ -131,7 +152,21 @@ public class SqlTableUtil {
 			st.executeUpdate(sql);
 		} catch (SQLException e) {
 			throw new CuponSystemException("Failed updateing coupon purchase " , e);
-		}
+		}finally {pool.returnConnection(con);}
+		
+		
+	}
+	
+	public static void createCopuon(String companyId , String couponId ) throws CuponSystemException {
+		ConnectionPool pool = ConnectionPool.getConnectionPool();
+		Connection con = pool.getConnection();
+		try {
+		String sql = "INSERT INTO COMPANY_COUPON VALUES("+companyId +"," + couponId + ")";
+		Statement st = con.createStatement();
+			st.executeUpdate(sql);
+		} catch (SQLException e) {
+			throw new CuponSystemException("Failed updateing coupon purchase " , e);
+		}finally {pool.returnConnection(con);}
 		
 		
 	}

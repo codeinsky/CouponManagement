@@ -1,7 +1,6 @@
 package facades;
 import java.util.Collection;
 import java.util.HashSet;
-
 import DAO.CuoponDBDAO;
 import DAO.SqlTableUtil;
 import beans.Coupon;
@@ -17,10 +16,11 @@ public class CompanyFacade {
 	public void createCoupon(Coupon coupon) {
 		try {
 			if (SqlTableUtil.ifExsist("COUPON", "TITLE", coupon.getTitle())) {           // need test
-				System.out.println("Coupon with name = " + coupon.getTitle() + "already exsists"); 
+				System.out.println("Coupon with name = " + coupon.getTitle() + "  already exsists"); 
 			}	
 			else {
 				couponDAO.createCoupon(coupon);
+				SqlTableUtil.createCopuon(String.valueOf(companyIdLogged),String.valueOf(coupon.getId()));
 			}
 		} catch (CuponSystemException e) {
 			e.getMessage();
