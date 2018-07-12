@@ -2,10 +2,10 @@ package threads;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Collection;
 import java.util.HashSet;
-
 import DAO.SqlTableUtil;
 import couponSystemException.CuponSystemException;
 import dbConnectionPool.ConnectionPool;
@@ -32,7 +32,9 @@ public class DailyCouponExpirationTask implements Runnable{
 		long time = System.currentTimeMillis();
 		Date date = new Date(time);
 		String sql = "SELECT ID FROM COUPON WHERE END_DATE > date ";
-		Connection con = pool.getConnection();
+		Connection con;
+		try {
+		con = pool.getConnection();
 		Statement st = con.createStatement();
 		ResultSet rs = st.executeQuery(sql);
 		while (rs.next()) {
@@ -43,6 +45,11 @@ public class DailyCouponExpirationTask implements Runnable{
 		SqlTableUtil.removeWhere("COMPANY_COUPON", "COUPON_ID", id);
 		SqlTableUtil.removeWhere("CUSTOMER_COUPON", "COUPON_ID", id);
 		}
+		} catch (CuponSystemException | SQLException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		
 		try {
 			Thread.sleep(10000);
 		} catch (InterruptedException e) {
