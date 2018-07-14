@@ -11,6 +11,9 @@ import beans.Coupon;
 import beans.CouponType;
 import couponSystemException.CuponSystemException;
 import dbConnectionPool.ConnectionPool;
+import facades.CompanyFacade;
+import facades.CustomerFacade;
+import facades.Facade;
 
 public class SqlTableUtil {
 	
@@ -169,6 +172,51 @@ public class SqlTableUtil {
 		}finally {pool.returnConnection(con);}
 		
 		
+	}
+	
+	public Facade LogIn(String userType, String userName , String password) throws CuponSystemException {
+		ConnectionPool pool = ConnectionPool.getConnectionPool();
+		Connection con = pool.getConnection();
+		Facade facade = null;
+		try {
+		switch(userType) {
+		case "company" : {
+			String sql = "SELECT ID , PASSWORD  FROM COMPANY WHERE COMP_NAME=' "+ userName +"'";
+			Statement st;
+				st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			if (rs.next()) {
+				if(rs.getString("Password").equals(password)){
+					facade = new CompanyFacade(rs.getLong("ID"));
+					System.out.println("You are LoggedIN");
+				}
+				else {System.out.println("Wrong Password , please try again");}
+				}
+			else {System.out.println("Wrong User Name doesn't exist, please again");
+			}
+			
+		}
+			case "customer": {
+			String sql = "SELECT ID , PASSWORD  FROM CUSTOMER WHERE CUST_NAME=' " + userName + "'";
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			if (rs.next()) {
+				if (rs.getString("Password").equals(password)){
+					facade = new CustomerFacade(rs.getLong("ID"));
+					System.out.println("You are LoggedIN");
+					}
+				else {System.out.println("Wrong Password, please try again");}
+			}
+			else {System.out.println("User do not exist, please try again");
+				
+			}
+			
+		}
+		}
+		} catch (SQLException e) {
+			throw new CuponSystemException ("Failed to LogON, please try again" , e); 
+		}
+		return facade;
 	}
 	
 }

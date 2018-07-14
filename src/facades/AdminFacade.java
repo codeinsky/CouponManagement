@@ -10,7 +10,7 @@ import beans.Coupon;
 import beans.Customer;
 import couponSystemException.CuponSystemException;
 
-public class AdminFacade {
+public class AdminFacade extends Facade{
 
 	CompanyDBDAO  companyDAO = new CompanyDBDAO();
 	CustomerDBDAO customerDAO = new CustomerDBDAO();

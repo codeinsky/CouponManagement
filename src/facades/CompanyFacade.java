@@ -6,7 +6,7 @@ import DAO.SqlTableUtil;
 import beans.Coupon;
 import couponSystemException.CuponSystemException;
 
-public class CompanyFacade {
+public class CompanyFacade extends Facade{
 	private long companyIdLogged; //ID of the company that is logged in the system
 	public CompanyFacade(long companyIdLogged) {
 		this.companyIdLogged = companyIdLogged;

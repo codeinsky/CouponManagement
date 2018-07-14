@@ -8,7 +8,7 @@ import DAO.SqlTableUtil;
 import beans.Coupon;
 import couponSystemException.CuponSystemException;
 
-public class CustomerFacade {
+public class CustomerFacade extends Facade{
 	long customerLogged;
 
 	public CustomerFacade(long customerLogged) {

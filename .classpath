@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="/home/alexander/eclipse-workspace/db-derby-10.13.1.1-bin/lib/derbyclient.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Java/jdk1.8.0_161/db/lib/derbyclient.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
