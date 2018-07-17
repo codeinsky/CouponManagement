@@ -207,7 +207,7 @@ public class SqlTableUtil {
 					}
 				else {System.out.println("Wrong Password, please try again");}
 			}
-			else {System.out.println("User do not exist, please try again");
+			else {System.out.println("User do not exists, please try again");
 				
 			}
 			
