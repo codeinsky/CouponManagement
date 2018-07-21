@@ -19,6 +19,7 @@ public class CompanyFacade extends Facade{
 				System.out.println("Coupon with name = " + coupon.getTitle() + "  already exsists"); 
 			}	
 			else {
+				coupon.setId(SqlTableUtil.GetId("COUPON_ID")); // gets last coupon ID per order 
 				couponDAO.createCoupon(coupon);
 				SqlTableUtil.createCopuon(String.valueOf(companyIdLogged),String.valueOf(coupon.getId()));
 			}

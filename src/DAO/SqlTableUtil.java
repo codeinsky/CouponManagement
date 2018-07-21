@@ -219,4 +219,40 @@ public class SqlTableUtil {
 		return facade;
 	}
 	
+		public static long GetId(String typeId) throws CuponSystemException {
+			long id= 0;
+			String sql= null; 
+			ConnectionPool pool = ConnectionPool.getConnectionPool();
+			Connection con = pool.getConnection();
+			switch(typeId) {
+			case "COUPON_ID": 
+				sql = "SELECT MAX (COUPON_ID) FROM COUPON_ID";
+				break;
+			case "CUSTOMER_ID":
+				sql = "SELECT MAX (CUSTOMER_ID) FROM CUSTOMER_ID";
+				break;
+			case "COMPANY_ID":
+				 sql = "SELECT MAX (COMPANY_ID) FROM COMPANY_ID";
+				 break;
+			}
+			try {
+			// gets last ID exists in the table 
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			if (rs.next()) {
+				id = rs.getLong(1);
+			}
+			// increments new ID 
+				String sqlUpdate = "INSERT INTO "+ typeId +" VALUES(" +(id+1)+ ")";
+				st.executeUpdate(sqlUpdate);
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw new CuponSystemException("Failed to crete new ID ",e);
+			}finally {pool.returnConnection(con);
+			}
+			//
+			
+			return id; 
+		}
+	
 }

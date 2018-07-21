@@ -20,9 +20,10 @@ public class AdminFacade extends Facade{
 		// check if the Company name already exists 
 		try {
 			if (SqlTableUtil.ifExsist("COMPANY", "COMP_NAME", company.getCompName())) {           // need test
-				System.out.println("Company with name = " + company.getCompName() + "already exsists"); 
+				System.out.println("Company with name = " + company.getCompName() + " already exsists"); 
 			}
-			else { // need to check if to do " new company" or will get ready object 
+			else { 
+				company.setId(SqlTableUtil.GetId("COMPANY_ID"));
 				companyDAO.createCompany(company);
 			}
 		} catch (CuponSystemException e) {
@@ -94,6 +95,7 @@ public class AdminFacade extends Facade{
 			throw new CuponSystemException("Customer with Name=" + customer.getCustName() + " already exists");	
 			}
 			else {
+				customer.setId(SqlTableUtil.GetId("CUSTOMER_ID"));
 				customerDAO.createCustomer(customer); // creating new customer 
 			}
 		} catch (CuponSystemException e) {
