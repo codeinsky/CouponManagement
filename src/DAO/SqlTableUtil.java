@@ -7,6 +7,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Collection;
 import java.util.HashSet;
+
+import org.apache.derby.tools.sysinfo;
+
 import beans.Coupon;
 import beans.CouponType;
 import couponSystemException.CuponSystemException;
@@ -174,14 +177,15 @@ public class SqlTableUtil {
 		
 	}
 	
-	public Facade LogIn(String userType, String userName , String password) throws CuponSystemException {
+	public static Facade LogIn(String userType, String userName , String password) throws CuponSystemException {
 		ConnectionPool pool = ConnectionPool.getConnectionPool();
 		Connection con = pool.getConnection();
 		Facade facade = null;
 		try {
 		switch(userType) {
-		case "company" : {
-			String sql = "SELECT ID , PASSWORD  FROM COMPANY WHERE COMP_NAME=' "+ userName +"'";
+		case "company": {
+			String sql = "SELECT ID , PASSWORD  FROM COMPANY WHERE COMP_NAME='"+ userName +"'";
+			System.out.println(sql);
 			Statement st;
 				st = con.createStatement();
 			ResultSet rs = st.executeQuery(sql);
@@ -194,10 +198,12 @@ public class SqlTableUtil {
 				}
 			else {System.out.println("Wrong User Name doesn't exist, please again");
 			}
-			
+			pool.returnConnection(con);
+			break;
 		}
 			case "customer": {
-			String sql = "SELECT ID , PASSWORD  FROM CUSTOMER WHERE CUST_NAME=' " + userName + "'";
+			String sql = "SELECT ID , PASSWORD  FROM CUSTOMER WHERE CUST_NAME='"+ userName +"'";
+			System.out.println(sql);
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery(sql);
 			if (rs.next()) {
@@ -210,7 +216,7 @@ public class SqlTableUtil {
 			else {System.out.println("User do not exists, please try again");
 				
 			}
-			
+			pool.returnConnection(con);
 		}
 		}
 		} catch (SQLException e) {

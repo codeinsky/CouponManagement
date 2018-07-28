@@ -7,6 +7,7 @@ import beans.Customer;
 import couponSystemException.CuponSystemException;
 import facades.AdminFacade;
 import facades.CompanyFacade;
+import facades.Facade;
 
 public class CompanyTest {
 	public static void main(String[] args) throws CuponSystemException {
@@ -24,6 +25,8 @@ public class CompanyTest {
 //		System.out.println(SqlTableUtil.GetId("COUPON_ID"));
 //		System.out.println(SqlTableUtil.GetId("CUSTOMER_ID"));
 //		
+		Facade myCustomer = SqlTableUtil.LogIn("customer", "Peter", "1234");
+		Facade myCopmany = SqlTableUtil.LogIn("company", "New", "1234");
 	}
 }
 
