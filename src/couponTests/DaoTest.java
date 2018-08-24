@@ -3,11 +3,11 @@ package couponTests;
 
 import java.sql.Date;
 
-import DAO.CompanyDBDAO;
-import DAO.CuoponDBDAO;
 import beans.Coupon;
 import beans.CouponType;
 import couponSystemException.CuponSystemException;
+import dao.CompanyDBDAO;
+import dao.CuoponDBDAO;
 
 public class DaoTest {
 

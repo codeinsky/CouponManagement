@@ -1,8 +1,8 @@
 package couponTests;
 
-import DAO.CustomerDBDAO;
 import beans.Customer;
 import couponSystemException.CuponSystemException;
+import dao.CustomerDBDAO;
 
 public class CustomerCheck {
 public static void main(String[] args) throws CuponSystemException {

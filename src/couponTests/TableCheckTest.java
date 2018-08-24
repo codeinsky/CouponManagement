@@ -2,8 +2,8 @@ package couponTests;
 
 import java.sql.SQLException;
 
-import DAO.SqlTableUtil;
 import couponSystemException.CuponSystemException;
+import dao.SqlTableUtil;
 
 public class TableCheckTest {
 	public static void main(String[] args) throws CuponSystemException, SQLException {

@@ -1,8 +1,8 @@
 package couponTests;
-import DAO.CompanyDBDAO;
-import DAO.CuoponDBDAO;
-import DAO.CustomerDBDAO;
 import couponSystemException.CuponSystemException;
+import dao.CompanyDBDAO;
+import dao.CuoponDBDAO;
+import dao.CustomerDBDAO;
 import dbConnectionPool.ConnectionPool;
 import threads.DailyCouponExpirationTask;
 

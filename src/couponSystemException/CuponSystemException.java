@@ -7,16 +7,18 @@ import java.sql.SQLException;
 public class CuponSystemException extends Exception {
 
 	private static final long serialVersionUID = 1L;
-	
-	// Connection pool close exception 
-		public CuponSystemException(String string) {
-			System.out.println(string);
-		}
-    // INTERUPTED EXCEPTION 
+
+	// Connection pool close exception
+	public CuponSystemException(String string) {
+		System.out.println(string);
+	}
+
+	// INTERUPTED EXCEPTION
 	public CuponSystemException(String string, InterruptedException e) {
 		System.out.println(string + e);
 	}
-	//SQL EXCEPTION 
+
+	// SQL EXCEPTION
 	public CuponSystemException(String string, SQLException e) {
 		System.out.println(string + e);
 	}
@@ -86,12 +88,12 @@ public class CuponSystemException extends Exception {
 		// TODO Auto-generated method stub
 		return super.toString();
 	}
-	
-	// test 
-	/*public void deviation() { 
-		System.out.println("Pls do not 0 for deviation");
-	}*/
-    
+
+	// test
+	/*
+	 * public void deviation() { System.out.println("Pls do not 0 for deviation"); }
+	 */
+
 	public void dataBase() {
 		System.out.println("Issue with Data Base connection ");
 	}

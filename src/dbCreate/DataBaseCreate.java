@@ -1,4 +1,4 @@
-package dBcreate;
+package dbCreate;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -26,7 +26,7 @@ public class DataBaseCreate {
 	// String sql = "Create table Company_ID (Company_ID BIGINT)";
 	// String sql="Insert into Company_ID  values(1)"; // initialization first ID  	
 	//	String sql = "Create table CUSTOMER_ID (CUSTOMER_ID BIGINT)";
-	//	String sql="Insert into CUSTOMER_ID  values(1)"; // initialization first ID
+	//	String sql=" "; // initialization first ID
 	//	String sql = "Create table COUPON_ID (COUPON_ID BIGINT)";
 		String sql="Insert into COUPON_ID values(1)"; // initialization first ID
 		java.sql.Statement st;
@@ -38,7 +38,7 @@ public class DataBaseCreate {
 			e.printStackTrace();
 		}
 		pool.returnConnection(con);
-		System.out.println(pool.ConnectionAmoutCheck());
+		System.out.println(pool.connectionAmoutCheck());
 
 
 

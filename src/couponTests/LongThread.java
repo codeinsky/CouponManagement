@@ -30,7 +30,7 @@ public class LongThread extends Thread {
 	
 		pool.returnConnection(con1);
 		System.out.println("Thread 10 has returned the connection");
-		System.out.println("Now pool has " + pool.ConnectionAmoutCheck());
+		System.out.println("Now pool has " + pool.connectionAmoutCheck());
 	}
 }
 

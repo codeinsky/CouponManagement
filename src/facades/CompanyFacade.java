@@ -1,16 +1,21 @@
 package facades;
 import java.util.Collection;
 import java.util.HashSet;
-import DAO.CuoponDBDAO;
-import DAO.SqlTableUtil;
+
 import beans.Coupon;
 import couponSystemException.CuponSystemException;
+import dao.CuoponDBDAO;
+import dao.SqlTableUtil;
 
 public class CompanyFacade extends Facade{
 	private long companyIdLogged; //ID of the company that is logged in the system
+	
+	// constructor , gets ID number of company reference   
 	public CompanyFacade(long companyIdLogged) {
 		this.companyIdLogged = companyIdLogged;
 	}
+	
+	
 	CuoponDBDAO couponDAO = new CuoponDBDAO();
 	// tested works 
 	public void createCoupon(Coupon coupon) {
@@ -19,7 +24,7 @@ public class CompanyFacade extends Facade{
 				System.out.println("Coupon with name = " + coupon.getTitle() + "  already exsists"); 
 			}	
 			else {
-				coupon.setId(SqlTableUtil.GetId("COUPON_ID")); // gets last coupon ID per order 
+				coupon.setId(SqlTableUtil.getId("COUPON_ID")); // gets last coupon ID per order 
 				couponDAO.createCoupon(coupon);
 				SqlTableUtil.createCopuon(String.valueOf(companyIdLogged),String.valueOf(coupon.getId()));
 			}
@@ -52,7 +57,7 @@ public class CompanyFacade extends Facade{
 }
 	
 	// TEST DONE , works  
-	public void UpdqateCoupon(Coupon coupon) {
+	public void updqateCoupon(Coupon coupon) {
 		// need check if that coupon belongs to the company
 		Collection<Long> couponsIds ;
 		try {
@@ -74,7 +79,7 @@ public class CompanyFacade extends Facade{
 		
 	}
 	// done and works 
-	public Coupon GetCouponById (long id) {
+	public Coupon getCouponById (long id) {
 		Coupon coupon = null;
 		Collection<Long> couponsIds ;
 		try {
@@ -94,7 +99,7 @@ public class CompanyFacade extends Facade{
 		
 	}
 	// Test done - works 
-	public Collection<Coupon> GetAllCoupons() {
+	public Collection<Coupon> getAllCoupons() {
 		Collection<Coupon> allCoupons = new HashSet<Coupon>();
 		Collection<Long> couponsIds ;
 		try {
@@ -117,10 +122,10 @@ public class CompanyFacade extends Facade{
 		}
 	
 	// Get list of coupons sorted by : TYPE or PRICE LESS THEN or DATE BEFORE 'yyyy-mm-dd'
-	public Collection<Coupon> SortCouponBy (String select, String refernce){
+	public Collection<Coupon> sortCouponBy (String select, String refernce){
 		Collection<Coupon> selectedCouponsBy = null;
 		try {
-			selectedCouponsBy = SqlTableUtil.GetCouponSelected(companyIdLogged, select, refernce);
+			selectedCouponsBy = SqlTableUtil.getCouponSelected(companyIdLogged, select, refernce);
 		} catch (CuponSystemException e) {
 			e.getMessage();
 		}
