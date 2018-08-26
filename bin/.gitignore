@@ -1,9 +1,5 @@
-/couponTests/
-/dBcreate/
+/dbCreate/
+/dbConnectionPool/
 /dao/
 /facades/
-/threads/
-/dbCreate/
-/beans/
-/couponSystemException/
-/dbConnectionPool/
+/couponTests/

@@ -10,7 +10,7 @@ import dao.CuoponDBDAO;
 import dao.HelperMethodsDAO;
 
 
-public class CustomerFacadeF {
+public class CustomerFacadeF extends Facade{
 	long customerLogged;
 
 	// has a constructor for ID reference for customer activities

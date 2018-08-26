@@ -11,8 +11,11 @@ import beans.Coupon;
 import beans.CouponType;
 import couponSystemException.CuponSystemException;
 import dbConnectionPool.ConnectionPool;
+import facades.AdminFacadeF;
 import facades.CompanyFacade;
+import facades.CompanyFacadeF;
 import facades.CustomerFacade;
+import facades.CustomerFacadeF;
 import facades.Facade;
 
 public class HelperMethodsDAO implements HelperMethods {
@@ -176,6 +179,17 @@ public class HelperMethodsDAO implements HelperMethods {
 		Facade facade = null;
 		try {
 			switch (userType) {
+			case "admin": {
+				if (userName.equals("admin") && password.equals("1234")) {
+					facade = new AdminFacadeF();
+					System.out.println("Welcome Admin");
+				}
+				else {
+					System.out.println("wrong user name or password , please try again");
+				}
+				pool.returnConnection(con);
+				break;
+			}
 			case "company": {
 				String sql = "SELECT ID , PASSWORD  FROM COMPANY WHERE COMP_NAME='" + userName + "'";
 				System.out.println(sql);
@@ -184,13 +198,13 @@ public class HelperMethodsDAO implements HelperMethods {
 				ResultSet rs = st.executeQuery(sql);
 				if (rs.next()) {
 					if (rs.getString("Password").equals(password)) {
-						facade = new CompanyFacade(rs.getLong("ID"));
+						facade = new CompanyFacadeF(rs.getLong("ID"));
 						System.out.println("You are LoggedIN");
 					} else {
 						System.out.println("Wrong Password , please try again");
 					}
 				} else {
-					System.out.println("Wrong User Name doesn't exist, please again");
+					System.out.println("Wrong User Name doesn't exist, please try again");
 				}
 				pool.returnConnection(con);
 				break;
@@ -202,7 +216,7 @@ public class HelperMethodsDAO implements HelperMethods {
 				ResultSet rs = st.executeQuery(sql);
 				if (rs.next()) {
 					if (rs.getString("Password").equals(password)) {
-						facade = new CustomerFacade(rs.getLong("ID"));
+						facade = new CustomerFacadeF(rs.getLong("ID"));
 						System.out.println("You are LoggedIN");
 					} else {
 						System.out.println("Wrong Password, please try again");
