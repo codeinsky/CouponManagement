@@ -48,7 +48,7 @@ public class CompanyDBDAO implements CompanyDAO {
 			state = con.prepareStatement(removeCompanySt);
 			state.setLong(1, company.getId());
 			state.executeUpdate();
-
+			System.out.println("company removed");
 		} catch (SQLException e) {
 			throw new CuponSystemException("Failed to remove the company", e);
 		} finally {
@@ -133,7 +133,7 @@ public class CompanyDBDAO implements CompanyDAO {
 	public Collection<Coupon> getCoupons(Company company) throws CuponSystemException {
 		Collection<Coupon> couponList = new HashSet<Coupon>(); // Collection of coupons returned by the method
 		Collection<Long> couponIdList = new HashSet<Long>(); // List with all coupons ID's belong to Company
-		String queryJoinTable = "SELECT * FROM COMPANY_COUPON WHERE ID = " + company.getId();
+		String queryJoinTable = "SELECT * FROM COMPANY_COUPON WHERE COUPON_ID = " + company.getId();
 		ConnectionPool pool = ConnectionPool.getConnectionPool();
 		Connection con = pool.getConnection();
 		try {
