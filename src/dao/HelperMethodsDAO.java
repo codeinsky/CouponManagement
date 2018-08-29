@@ -192,7 +192,6 @@ public class HelperMethodsDAO implements HelperMethods {
 			}
 			case "company": {
 				String sql = "SELECT ID , PASSWORD  FROM COMPANY WHERE COMP_NAME='" + userName + "'";
-				System.out.println(sql);
 				Statement st;
 				st = con.createStatement();
 				ResultSet rs = st.executeQuery(sql);
