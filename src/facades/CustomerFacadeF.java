@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.util.Collection;
 import java.util.HashSet;
 
+import org.apache.derby.tools.sysinfo;
+
 import beans.Coupon;
 import couponSystemException.CuponSystemException;
 import dao.CuoponDBDAO;
@@ -29,7 +31,7 @@ public class CustomerFacadeF extends Facade{
 		try {
 			checkedCoupon = couponDAO.getCoupon(coupon.getId());
 		} catch (CuponSystemException e) {
-			e.getMessage();
+		
 		}
 		// check if coupon was already purchased by the Customer
 		Collection<Long> purchasedCouponsIds = null;
@@ -53,6 +55,7 @@ public class CustomerFacadeF extends Facade{
 		}
 
 		else {
+			System.out.println("All coupons are soldout");
 			amountFlag = false;
 		}
 
@@ -60,7 +63,7 @@ public class CustomerFacadeF extends Facade{
 		Date couponEndDate = checkedCoupon.getEndDate();
 		long time = System.currentTimeMillis();
 		Date currentDate = new Date(time);
-		if ((couponEndDate.compareTo(currentDate)) > 0) {
+		if ((couponEndDate.compareTo(currentDate)) < 0) {
 			System.out.println("Sorry, the coupon you want to buy is expired");
 			dateFlag = false;
 		} else {
@@ -89,7 +92,6 @@ public class CustomerFacadeF extends Facade{
 		Collection<Long> couponsId = null;
 		try {
 			couponsId = helperDAO.getCouponsBelongTo("COUPON_ID", "CUSTOMER_COUPON", "CUSTOMER_ID", customerLogged);
-			System.out.println(couponsId);
 			for (long id : couponsId) {
 				myCoupons.add(couponDAO.getCoupon(id));
 			}

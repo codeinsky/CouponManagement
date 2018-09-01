@@ -12,9 +12,7 @@ import beans.CouponType;
 import couponSystemException.CuponSystemException;
 import dbConnectionPool.ConnectionPool;
 import facades.AdminFacadeF;
-import facades.CompanyFacade;
 import facades.CompanyFacadeF;
-import facades.CustomerFacade;
 import facades.CustomerFacadeF;
 import facades.Facade;
 
@@ -101,7 +99,7 @@ public class HelperMethodsDAO implements HelperMethods {
 
 		case "Date":
 			sql = "SELECT * FROM COUPON " + "INNER JOIN COMPANY_COUPON " + "ON Coupon.ID=company_coupon.COUPON_ID "
-					+ "WHERE END_DATE < " + refernce + "AND company_id = " + id;
+					+ "WHERE END_DATE < '" + refernce + "' AND company_id = " + id;
 			break;
 
 		case "customerCouponsByPrice":
@@ -111,7 +109,7 @@ public class HelperMethodsDAO implements HelperMethods {
 
 		case "customerCouponsByDate":
 			sql = "SELECT * FROM COUPON " + "INNER JOIN CUSTOMER_COUPON " + "ON Coupon.ID=customer_coupon.COUPON_ID "
-					+ "WHERE END_DATE < " + refernce + "AND customer_id = " + id;
+					+ "WHERE END_DATE < '" + refernce + "' AND customer_id = " + id;
 			break;
 
 		case "customerCouponsByType":
@@ -210,7 +208,6 @@ public class HelperMethodsDAO implements HelperMethods {
 			}
 			case "customer": {
 				String sql = "SELECT ID , PASSWORD  FROM CUSTOMER WHERE CUST_NAME='" + userName + "'";
-				System.out.println(sql);
 				Statement st = con.createStatement();
 				ResultSet rs = st.executeQuery(sql);
 				if (rs.next()) {

@@ -10,14 +10,16 @@ import facades.CompanyFacadeF;
 import facades.CustomerFacadeF;
 import facades.Facade;
 import threads.DailyCouponExpirationTask;
-
+ // need to activate facade .... 
 public class CouponSystem {
 	CustomerDBDAO customerDAO = new CustomerDBDAO();
 	CuoponDBDAO clientDBDAO = new CuoponDBDAO();
 	CompanyDBDAO adminDAO = new CompanyDBDAO();
 	HelperMethodsDAO helper = new HelperMethodsDAO();
 	Thread couponCleaner = new Thread(new DailyCouponExpirationTask(false));
-	private CouponSystem() {};
+	private CouponSystem() {
+		
+	};
 	private static CouponSystem instance;
 	public  static CouponSystem getInstance() {
 		if (instance == null) {
@@ -33,14 +35,7 @@ public class CouponSystem {
 	} catch (CuponSystemException e) {
 		e.getMessage();
 	}
-//	 // casting the facade for needed type ???
-//	 switch (userType) {
-//	 case ("admin"): facade = (AdminFacadeF)facade;
-//	 break ;
-//	 case ("company"): facade  = (CompanyFacadeF)facade;
-//	 break; 
-//	 case ("customer"): facade = (CustomerFacadeF)facade;
-//	 }
+
 	 return facade;
 	 
  }
