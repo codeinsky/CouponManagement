@@ -64,7 +64,7 @@ public static void main(String[] args) {
      *2. Removes All  expired coupons from tables : COUPON , COMPANY_COUPON, CUSTOMER_COUPON - done and works 
      *
      * 	
-	 **/
+	 **/ 
 	
 	
 	
@@ -92,8 +92,8 @@ public static void main(String[] args) {
 	
 	// 								Thread Test 
 //	
-	Thread thread = new Thread(new DailyCouponExpirationTask(false));
-	thread.run();
+//	Thread thread = new Thread(new DailyCouponExpirationTask(false));
+//	thread.run();
 //	
 	//								Customer Test 
 	

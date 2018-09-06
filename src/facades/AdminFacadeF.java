@@ -5,7 +5,7 @@ import java.util.Collection;
 import beans.Company;
 import beans.Coupon;
 import beans.Customer;
-import couponSystemException.CuponSystemException;
+import couponSystemException.CouponSystemException;
 import dao.CompanyDBDAO;
 import dao.CuoponDBDAO;
 import dao.CustomerDBDAO;
@@ -22,13 +22,13 @@ public class AdminFacadeF extends Facade{
 	public void createCompany(Company company) {
 		// check if the Company name already exists
 		try {
-			if (helperDAO.ifExsist("COMPANY", "COMP_NAME", company.getCompName())) { // need test
+			if (helperDAO.ifExist("COMPANY", "COMP_NAME", company.getCompName())) { // need test
 				System.out.println("Company with name = " + company.getCompName() + " already exsists");
 			} else {
 				company.setId(helperDAO.getId("COMPANY_ID"));
 				companyDAO.createCompany(company);
 			}
-		} catch (CuponSystemException e) {
+		} catch (CouponSystemException e) {
 			e.getMessage();
 		}
 
@@ -48,7 +48,7 @@ public class AdminFacadeF extends Facade{
 				// removing the Company from Company DB table
 			}
 			companyDAO.removeCompany(company);
-		} catch (CuponSystemException e) {
+		} catch (CouponSystemException e) {
 			e.getMessage();
 		}
 	}
@@ -64,10 +64,10 @@ public class AdminFacadeF extends Facade{
 			} // update
 
 			else {
-				throw new CuponSystemException("Company NAME can not be changed");
+				throw new CouponSystemException("Company NAME can not be changed");
 			}
 
-		} catch (CuponSystemException e) {
+		} catch (CouponSystemException e) {
 			e.getMessage();
 		}
 	}
@@ -77,7 +77,7 @@ public class AdminFacadeF extends Facade{
 		Collection<Company> companies = null;
 		try {
 			companies = companyDAO.getAllCompanies();
-		} catch (CuponSystemException e) {
+		} catch (CouponSystemException e) {
 			e.getMessage();
 		}
 		return companies;
@@ -88,7 +88,7 @@ public class AdminFacadeF extends Facade{
 		Company company = null;
 		try {
 			company = companyDAO.getCompany(id);
-		} catch (CuponSystemException e) {
+		} catch (CouponSystemException e) {
 			e.getMessage();
 		}
 		return company;
@@ -98,13 +98,13 @@ public class AdminFacadeF extends Facade{
 	public void addCustomer(Customer customer) {
 		// need check if there is already customer with same name
 		try {
-			if (helperDAO.ifExsist("CUSTOMER", "CUST_NAME", customer.getCustName())) {
-				throw new CuponSystemException("Customer with Name=" + customer.getCustName() + " already exists");
+			if (helperDAO.ifExist("CUSTOMER", "CUST_NAME", customer.getCustName())) {
+				throw new CouponSystemException("Customer with Name=" + customer.getCustName() + " already exists");
 			} else {
 				customer.setId(helperDAO.getId("CUSTOMER_ID"));
 				customerDAO.createCustomer(customer); // creating new customer
 			}
-		} catch (CuponSystemException e) {
+		} catch (CouponSystemException e) {
 			e.getMessage();
 		}
 
@@ -118,7 +118,7 @@ public class AdminFacadeF extends Facade{
 			helperDAO.removeWhere("Customer_Coupon", "Customer_ID", customer.getId()); // delete Customer Coupon
 																							// History
 			customerDAO.removeCustomer(customer); // remove Customer from the System
-		} catch (CuponSystemException e) {
+		} catch (CouponSystemException e) {
 			e.getMessage();
 		}
 
@@ -133,9 +133,9 @@ public class AdminFacadeF extends Facade{
 			if (customer.getCustName().equals(CustomerpriorUpdate.getCustName())) {
 				customerDAO.updateCustomer(customer);
 			} else {
-				throw new CuponSystemException("Customer name can't be changed");
+				throw new CouponSystemException("Customer name can't be changed");
 			}
-		} catch (CuponSystemException e) {
+		} catch (CouponSystemException e) {
 			e.getMessage();
 		}
 	}
@@ -145,7 +145,7 @@ public class AdminFacadeF extends Facade{
 		Collection<Customer> customerList = null;
 		try {
 			customerList = customerDAO.getAllCustomers();
-		} catch (CuponSystemException e) {
+		} catch (CouponSystemException e) {
 			e.getMessage();
 		}
 		return customerList;
@@ -156,7 +156,7 @@ public class AdminFacadeF extends Facade{
 		Customer customer = null;
 		try {
 			customer = customerDAO.getCustomer(id);
-		} catch (CuponSystemException e) {
+		} catch (CouponSystemException e) {
 			e.getMessage();
 		}
 		return customer;

@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.HashSet;
 
 import beans.Coupon;
-import couponSystemException.CuponSystemException;
+import couponSystemException.CouponSystemException;
 import dao.CuoponDBDAO;
 import dao.HelperMethodsDAO;
 
@@ -22,14 +22,14 @@ public class CompanyFacadeF extends Facade {
 	// tested works
 	public void createCoupon(Coupon coupon) {
 		try {
-			if (helperDAO.ifExsist("COUPON", "TITLE", coupon.getTitle())) { // need test
+			if (helperDAO.ifExist("COUPON", "TITLE", coupon.getTitle())) { // need test
 				System.out.println("Coupon with name = " + coupon.getTitle() + "  already exsists");
 			} else {
 				coupon.setId(helperDAO.getId("COUPON_ID")); // gets last coupon ID per order
 				couponDAO.createCoupon(coupon);
 				helperDAO.createCopuon(String.valueOf(companyIdLogged), String.valueOf(coupon.getId()));
 			}
-		} catch (CuponSystemException e) {
+		} catch (CouponSystemException e) {
 			e.getMessage();
 		}
 
@@ -52,7 +52,7 @@ public class CompanyFacadeF extends Facade {
 				System.out.println("Coupon you want to remove does not belong to your company");
 			}
 
-		} catch (CuponSystemException e) {
+		} catch (CouponSystemException e) {
 			e.printStackTrace();
 			e.getMessage();
 		}
@@ -68,12 +68,12 @@ public class CompanyFacadeF extends Facade {
 			System.out.println(couponsIds);
 			// checks if the coupon belongs to the company
 			if (couponsIds.contains(coupon.getId())) {
-				couponDAO.updateCopupon(coupon);
+				couponDAO.updateCoupon(coupon);
 				System.out.println("Proccesing the coupon update");
 			} else {
 				System.out.println("This coupon doesn't belong to your Company");
 			}
-		} catch (CuponSystemException e) {
+		} catch (CouponSystemException e) {
 			e.getMessage();
 		}
 
@@ -92,7 +92,7 @@ public class CompanyFacadeF extends Facade {
 			} else {
 				System.out.println("This coupon doesn't belong to your Company");
 			}
-		} catch (CuponSystemException e) {
+		} catch (CouponSystemException e) {
 			e.getMessage();
 		}
 		return coupon;
@@ -114,7 +114,7 @@ public class CompanyFacadeF extends Facade {
 				}
 			}
 
-		} catch (CuponSystemException e) {
+		} catch (CouponSystemException e) {
 			e.getMessage();
 		}
 		return allCoupons;
@@ -126,7 +126,7 @@ public class CompanyFacadeF extends Facade {
 		Collection<Coupon> selectedCouponsBy = null;
 		try {
 			selectedCouponsBy = helperDAO.getCouponSelected(companyIdLogged, select, refernce);
-		} catch (CuponSystemException e) {
+		} catch (CouponSystemException e) {
 			e.getMessage();
 		}
 		return selectedCouponsBy;

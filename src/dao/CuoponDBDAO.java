@@ -10,13 +10,36 @@ import java.util.Collection;
 import java.util.HashSet;
 import beans.Coupon;
 import beans.CouponType;
-import couponSystemException.CuponSystemException;
+import couponSystemException.CouponSystemException;
 import dbConnectionPool.ConnectionPool;
 
+
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CuoponDBDAO.
+ *
+ * @author Alexander
+ * CouponDBDAO class includes methods based on CouponDAO interface. 
+ * Operations with DataBase Coupon table  
+ */
 public class CuoponDBDAO implements CuoponDAO {
 
+
+	
+	
+	/* (non-Javadoc)
+	 * @see dao.CuoponDAO#createCoupon(beans.Coupon)
+	 */
 	@Override
-	public void createCoupon(Coupon coupon) throws CuponSystemException {
+	/**
+	 * CreateCoupon void method receives Coupon bean and create new Row in Coupon Table with Coupon attributes. 
+	 * @see dao.CuoponDAO#createCoupon(beans.Coupon)
+	 * @param coupon 
+	 * @throws CuponSystemException 
+	 * 
+	 **/
+	
+	public void createCoupon(Coupon coupon) throws CouponSystemException {
 		String sql = "INSERT INTO COUPON(ID, TITLE , START_DATE, END_DATE, AMOUNT, TYPE , MESSAGE, PRICE , IMAGE) VALUES(?,?,?,?,?,?,?,?,?)";
 		ConnectionPool pool = ConnectionPool.getConnectionPool();
 		Connection con = pool.getConnection();
@@ -33,15 +56,24 @@ public class CuoponDBDAO implements CuoponDAO {
 			state.setString(9, coupon.getImage());
 			state.execute();
 		} catch (SQLException e) {
-			throw new CuponSystemException("Failed to add new coupon to Data Base", e);
+			throw new CouponSystemException("Failed to add new coupon to Data Base", e);
 		} finally {
 			pool.returnConnection(con);
 		}
 
 	}
-
+	
+	
+	/**
+	 * RemoveCoupon receives Coupon bean and search for it in DataBase with ID. 
+	 * Removes(delete) the coupon row. 
+	 *
+	 * @param the coupon
+	 * @throws the coupon system exception
+	 * @see dao.CuoponDAO#removeCoupon(beans.Coupon)
+	 */
 	@Override
-	public void removeCoupon(Coupon coupon) throws CuponSystemException {
+	public void removeCoupon(Coupon coupon) throws CouponSystemException {
 		ConnectionPool pool = ConnectionPool.getConnectionPool();
 		Connection con = pool.getConnection();
 		String sql = "DELETE FROM COUPON WHERE ID= " + coupon.getId();
@@ -50,15 +82,23 @@ public class CuoponDBDAO implements CuoponDAO {
 			state.executeUpdate(sql);
 			System.out.println("Coupon with id=" + coupon.getId() + " was removed");
 		} catch (SQLException e) {
-			throw new CuponSystemException("Failed to remove coupon from DATA BASE ", e);
+			throw new CouponSystemException("Failed to remove coupon from DATA BASE ", e);
 		} finally {
 			pool.returnConnection(con);
 		}
 
 	}
 
+	/**
+	 * UpdateCoupon void method receives Coupon bean, search  for existing coupon in DatBase 
+	 * Coupon table with same ID. Update (overwrite) all attributes. 
+	 *
+	 * @param coupon the coupon
+	 * @throws CouponSystemException the coupon system exception
+	 * @see dao.CuoponDAO#updateCoupon(beans.Coupon)
+	 */
 	@Override
-	public void updateCopupon(Coupon coupon) throws CuponSystemException {
+	public void updateCoupon(Coupon coupon) throws CouponSystemException {
 		ConnectionPool pool = ConnectionPool.getConnectionPool();
 		Connection con = pool.getConnection();
 		String sql = "UPDATE COUPON SET  " + "TITLE      = ? ," + "START_DATE = ? , " + "END_DATE = ? , "
@@ -76,15 +116,25 @@ public class CuoponDBDAO implements CuoponDAO {
 			state.setString(8, coupon.getImage());
 			state.executeUpdate();
 		} catch (SQLException e) {
-			throw new CuponSystemException("Failed to update coupon with id = " + coupon.getId(), e);
+			throw new CouponSystemException("Failed to update coupon with id = " + coupon.getId(), e);
 		} finally {
 			pool.returnConnection(con);
 		}
 
 	}
 
+	/**
+	 * GetCoupon method receives ID and look for existing coupon in DataBase in Coupon 
+	 * table. 
+	 * Returns Coupon bean.
+	 *
+	 * @param id long
+	 * @return Coupon
+	 * @throws CouponSystemException the coupon system exception
+	 * @see dao.CuoponDAO#getCoupon(long)
+	 */
 	@Override
-	public Coupon getCoupon(long id) throws CuponSystemException {
+	public Coupon getCoupon(long id) throws CouponSystemException {
 		Coupon coupon = new Coupon();
 		ConnectionPool pool = ConnectionPool.getConnectionPool();
 		Connection con = pool.getConnection();
@@ -107,15 +157,22 @@ public class CuoponDBDAO implements CuoponDAO {
 				System.out.println("Coupon with id = " + id + "does not exsist in the system");
 			}
 		} catch (SQLException e) {
-			throw new CuponSystemException("Failed to get coupon with id = " + id + " from the data base", e);
+			throw new CouponSystemException("Failed to get coupon with id = " + id + " from the data base", e);
 		} finally {
 			pool.returnConnection(con);
 		}
 		return coupon;
 	}
 
+	/**
+	 * GetAllCoupons returns all coupons from DataBase Coupon Table.
+	 *
+	 * @return Coupon Collection
+	 * @throws CouponSystemException the coupon system exception
+	 * @see dao.CuoponDAO#getAllCoupons()
+	 */
 	@Override
-	public Collection<Coupon> getAllCoupons() throws CuponSystemException {
+	public Collection<Coupon> getAllCoupons() throws CouponSystemException {
 		Collection<Coupon> couponList = new HashSet<Coupon>();
 		ConnectionPool pool = ConnectionPool.getConnectionPool();
 		Connection con = pool.getConnection();
@@ -129,7 +186,7 @@ public class CuoponDBDAO implements CuoponDAO {
 						rs.getString("MESSAGE"), rs.getDouble("PRICE"), rs.getString("IMAGE")));
 			}
 		} catch (SQLException e) {
-			throw new CuponSystemException("Failed to get coupons list", e);
+			throw new CouponSystemException("Failed to get coupons list", e);
 		} finally {
 			pool.returnConnection(con);
 		}
@@ -138,8 +195,16 @@ public class CuoponDBDAO implements CuoponDAO {
 
 	}
 
+	/**
+	 * Gets the coupon by type.
+	 *
+	 * @param the type
+	 * @return Coupon Collection
+	 * @throws the coupon system exception
+	 * @see dao.CuoponDAO#getCouponByType(beans.CouponType)
+	 */
 	@Override //
-	public Collection<Coupon> getCouponByType(CouponType type) throws CuponSystemException {
+	public Collection<Coupon> getCouponByType(CouponType type) throws CouponSystemException {
 		Collection<Coupon> couponsByType = new HashSet<Coupon>();
 		ConnectionPool pool = ConnectionPool.getConnectionPool();
 		Connection con = pool.getConnection();
@@ -158,7 +223,7 @@ public class CuoponDBDAO implements CuoponDAO {
 							rs.getString("MESSAGE"), rs.getDouble("PRICE"), rs.getString("IMAGE")));
 				} while (rs.next());
 		} catch (SQLException e) {
-			throw new CuponSystemException("Failed to get coupons from data base of type  " + type, e);
+			throw new CouponSystemException("Failed to get coupons from data base of type  " + type, e);
 		} finally {
 			pool.returnConnection(con);
 		}

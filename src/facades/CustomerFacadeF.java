@@ -7,21 +7,41 @@ import java.util.HashSet;
 import org.apache.derby.tools.sysinfo;
 
 import beans.Coupon;
-import couponSystemException.CuponSystemException;
+import couponSystemException.CouponSystemException;
 import dao.CuoponDBDAO;
 import dao.HelperMethodsDAO;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CustomerFacadeF.
+ */
 public class CustomerFacadeF extends Facade{
+	
+	/** The customer logged. */
 	long customerLogged;
 
+	/**
+	 * Instantiates a new customer facade F.
+	 *
+	 * @param customerLogged the customer logged
+	 */
 	// has a constructor for ID reference for customer activities
 	public CustomerFacadeF(long customerLogged) {
 		this.customerLogged = customerLogged;
 	}
 
+	/** The coupon DAO. */
 	CuoponDBDAO couponDAO = new CuoponDBDAO();
+	
+	/** The helper DAO. */
 	HelperMethodsDAO helperDAO = new HelperMethodsDAO();
+	
+	/**
+	 * Purchase coupon.
+	 *
+	 * @param coupon the coupon
+	 */
 	// works and tested
 	public void purchaseCoupon(Coupon coupon) {
 		Coupon checkedCoupon = null;
@@ -30,7 +50,7 @@ public class CustomerFacadeF extends Facade{
 		boolean alreadyPurchasedFlag = false;
 		try {
 			checkedCoupon = couponDAO.getCoupon(coupon.getId());
-		} catch (CuponSystemException e) {
+		} catch (CouponSystemException e) {
 		
 		}
 		// check if coupon was already purchased by the Customer
@@ -45,7 +65,7 @@ public class CustomerFacadeF extends Facade{
 				alreadyPurchasedFlag = true;
 			}
 
-		} catch (CuponSystemException e) {
+		} catch (CouponSystemException e) {
 			e.getMessage();
 		}
 
@@ -76,9 +96,9 @@ public class CustomerFacadeF extends Facade{
 			int amount = checkedCoupon.getAmount();
 			checkedCoupon.setAmount(amount - 1);
 			try {
-				couponDAO.updateCopupon(checkedCoupon);
+				couponDAO.updateCoupon(checkedCoupon);
 				helperDAO.buyCoupon(String.valueOf(customerLogged), String.valueOf(checkedCoupon.getId()));
-			} catch (CuponSystemException e) {
+			} catch (CouponSystemException e) {
 				e.getMessage();
 			}
 
@@ -86,6 +106,11 @@ public class CustomerFacadeF extends Facade{
 
 	}
 
+	/**
+	 * Gets the all my coupons.
+	 *
+	 * @return the all my coupons
+	 */
 	// works and tested
 	public Collection<Coupon> getAllMyCoupons() {
 		Collection<Coupon> myCoupons = new HashSet<Coupon>();
@@ -95,7 +120,7 @@ public class CustomerFacadeF extends Facade{
 			for (long id : couponsId) {
 				myCoupons.add(couponDAO.getCoupon(id));
 			}
-		} catch (CuponSystemException e) {
+		} catch (CouponSystemException e) {
 			e.getMessage();
 		}
 		return myCoupons;
@@ -118,11 +143,18 @@ public class CustomerFacadeF extends Facade{
 	// Traveling"
 	
 	
+	/**
+	 * Gets the my coupons sorted by type.
+	 *
+	 * @param select the select
+	 * @param reference the reference
+	 * @return the my coupons sorted by type
+	 */
 	public Collection<Coupon> getMyCouponsSortedByType(String select, String reference) {
 		Collection<Coupon> mySortedCoupons = null;
 		try {
 			mySortedCoupons = helperDAO.getCouponSelected(customerLogged, select, reference);
-		} catch (CuponSystemException e) {
+		} catch (CouponSystemException e) {
 			e.getMessage();
 		}
 		return mySortedCoupons;

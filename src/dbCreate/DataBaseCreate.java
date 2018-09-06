@@ -18,10 +18,21 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import couponSystemException.CuponSystemException;
+import couponSystemException.CouponSystemException;
 import dbConnectionPool.ConnectionPool;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DataBaseCreate.
+ * Creates all SQL tables needed for running the CouponSystem
+ */
 public class DataBaseCreate {
+	
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 		
 		String[] queryes = new String[11];
@@ -45,7 +56,7 @@ public class DataBaseCreate {
 		Connection con=null;
 		try {
 			con = pool.getConnection();
-		} catch (CuponSystemException e1) {
+		} catch (CouponSystemException e1) {
 			
 		}
 		

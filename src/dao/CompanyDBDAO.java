@@ -9,13 +9,30 @@ import java.util.Collection;
 import java.util.HashSet;
 import beans.Company;
 import beans.Coupon;
-import couponSystemException.CuponSystemException;
+import couponSystemException.CouponSystemException;
 import dbConnectionPool.ConnectionPool;
+// TODO: Auto-generated Javadoc
 
+/**
+ * The Class CompanyDBDAO.
+ *
+ * @author Alexander
+ * CompanyDBDAO class includes methods based on CompanyDAO interface. 
+ * Operations with DataBase Company table
+ */
 public class CompanyDBDAO implements CompanyDAO {
 
+		
 	@Override
-	public void createCompany(Company company) throws CuponSystemException {
+	/**
+	 * 
+	 * CreateCompany void method receives Company bean. 
+	 * Creates new row in Company table and inputs all Company attributes.
+	 * @see dao.CompanyDAO#createCompany(beans.Company)
+	 * @param  - Company bean. 
+	 * @throws - CuponSystemException
+	 */
+	public void createCompany(Company company) throws CouponSystemException {
 		ConnectionPool pool = ConnectionPool.getConnectionPool();
 		String createCompanySt = "INSERT INTO COMPANY(ID, COMP_NAME , PASSWORD , EMAIL ) VALUES (?,?,?,?) ";
 		Connection con = null;
@@ -30,15 +47,25 @@ public class CompanyDBDAO implements CompanyDAO {
 			state.setString(4, company.getEmail());
 			state.executeUpdate();
 		} catch (SQLException e) {
-			throw new CuponSystemException("Failed to add ne compnay in DataBase ", e);
+			throw new CouponSystemException("Failed to add ne compnay in DataBase ", e);
 		} finally {
 			pool.returnConnection(con);
 		}
 
 	}
-
+	
+	
 	@Override
-	public void removeCompany(Company company) throws CuponSystemException {
+	
+	/**
+	 * RemoveCompany void method receives Company bean.
+	 * Looks for existing company in DataBase Company table per Company ID. 
+	 * Deletes the company from DataBase Company Table. 
+	 * @see dao.CompanyDAO#removeCompany(beans.Company)
+	 * @param  - Company bean 
+	 * @throws - CuponSystemException 
+	 */
+	public void removeCompany(Company company) throws CouponSystemException {
 		ConnectionPool pool = ConnectionPool.getConnectionPool();
 		String removeCompanySt = "DELETE FROM COMPANY WHERE ID=? ";
 		Connection con = null;
@@ -50,15 +77,24 @@ public class CompanyDBDAO implements CompanyDAO {
 			state.executeUpdate();
 			System.out.println("company removed");
 		} catch (SQLException e) {
-			throw new CuponSystemException("Failed to remove the company", e);
+			throw new CouponSystemException("Failed to remove the company", e);
 		} finally {
 			pool.returnConnection(con);
 		}
 
 	}
-
-	@Override // can be changed to update one one item per company
-	public void updateCompany(Company company) throws CuponSystemException {
+	
+	
+	@Override 
+	/**
+	 * 
+	 * UpdateCompany void method receives Company bean. Looks for exiting Company in DataBase Company
+	 * table with same ID and  all attributes except ID.  
+	 * @see dao.CompanyDAO#updateCompany(beans.Company)
+	 * @param  - Company bean 
+	 * @throws - CuponSystemException 
+	 */
+	public void updateCompany(Company company) throws CouponSystemException {
 		ConnectionPool pool = ConnectionPool.getConnectionPool();
 		Connection con = pool.getConnection();
 		String updateCompany = "UPDATE COMPANY  SET COMP_NAME = ? , PASSWORD = ? , EMAIL = ?  WHERE ID= ?";
@@ -71,14 +107,24 @@ public class CompanyDBDAO implements CompanyDAO {
 			state.setLong(4, company.getId());
 			state.executeUpdate();
 		} catch (SQLException e) {
-			throw new CuponSystemException("Failed to update the Copmany", e);
+			throw new CouponSystemException("Failed to update the Copmany", e);
 		} finally {
 			pool.returnConnection(con);
 		}
 	}
 
+	
 	@Override
-	public Company getCompany(long id) throws CuponSystemException {
+	/**
+	 * GetCompany method receives Company ID. 
+	 * Search for the existing company in DataBase Company table with same ID.
+	 * Returns Company bean. 
+	 * @see dao.CompanyDAO#getCompany(long)
+	 * @param   - ID long 
+	 * @returns - Company bean 
+	 * @throws  - CuponSystemException 
+	 */
+	public Company getCompany(long id) throws CouponSystemException {
 		ConnectionPool pool = ConnectionPool.getConnectionPool();
 		Connection con = pool.getConnection();
 		Company company = new Company();
@@ -94,11 +140,11 @@ public class CompanyDBDAO implements CompanyDAO {
 				company.setPassword(rs.getString("PASSWORD"));
 				company.setEmail(rs.getString("EMAIL"));
 			} else {
-				throw new CuponSystemException("Copmany does not exist in the system");
+				throw new CouponSystemException("Copmany does not exist in the system");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new CuponSystemException("Failed to parse DataBase Result ");
+			throw new CouponSystemException("Failed to parse DataBase Result ");
 		} finally {
 			pool.returnConnection(con);
 		}
@@ -106,7 +152,13 @@ public class CompanyDBDAO implements CompanyDAO {
 	}
 
 	@Override
-	public Collection<Company> getAllCompanies() throws CuponSystemException {
+	/**
+	 * GetAllCopmanies - Method returns Company Collection - all existing companies in DataBase company table 
+	 * @see dao.CompanyDAO#getAllCompanies()
+	 * @returns - Company Collection 
+	 * @throws  - CuponSystemException 
+	 */
+	public Collection<Company> getAllCompanies() throws CouponSystemException {
 		Collection<Company> companyList = new HashSet<Company>();
 		String query = "SELECT * FROM  COMPANY";
 		ResultSet rs;
@@ -120,17 +172,28 @@ public class CompanyDBDAO implements CompanyDAO {
 						rs.getString("EMAIL")));
 			}
 		} catch (SQLException e) {
-			throw new CuponSystemException("Failed to get all Companies from DATA BASE", e);
+			throw new CouponSystemException("Failed to get all Companies from DATA BASE", e);
 		} finally {
 			pool.returnConnection(con);
 		}
 		return companyList;
 	}
 
+	
 	@Override
+	/**
+	 * GetCopuns method receives Company bean. 
+	 * Puts all Coupons ID belongs to the company in ID Collection (couponIdList)
+	 * Based on ID collection method all Coupon beans and puts into (couponList)
+	 * Returns couponList  
+	 * @see dao.CompanyDAO#getCoupons(beans.Company)
+	 * @param   - Company bean  
+	 * @returns - Coupon Collection.  
+	 * @throws  - CuponSystemException 
+	 */
 	// need run check with main , need to finish at home collection adding
 	// need to test with main , very important ! ! ! ! ! ! ! ! ! ! ! ! !
-	public Collection<Coupon> getCoupons(Company company) throws CuponSystemException {
+	public Collection<Coupon> getCoupons(Company company) throws CouponSystemException {
 		Collection<Coupon> couponList = new HashSet<Coupon>(); // Collection of coupons returned by the method
 		Collection<Long> couponIdList = new HashSet<Long>(); // List with all coupons ID's belong to Company
 		String queryJoinTable = "SELECT * FROM COMPANY_COUPON WHERE COUPON_ID = " + company.getId();
@@ -143,7 +206,7 @@ public class CompanyDBDAO implements CompanyDAO {
 				couponIdList.add(rs.getLong("COUPON_ID"));
 			}
 		} catch (SQLException e) {
-			throw new CuponSystemException("Failed to get Coupons from Data Base", e);
+			throw new CouponSystemException("Failed to get Coupons from Data Base", e);
 		} finally {
 			pool.returnConnection(con);
 		}
@@ -159,8 +222,20 @@ public class CompanyDBDAO implements CompanyDAO {
 
 	}
 
-	@Override // need TEST
-	public Boolean Login(String compName, String passowrd) throws CuponSystemException {
+	
+	@Override 
+	
+	/**
+	 * LogIn method receives Company Name and Password. 
+	 * Looks for existing company in DataBase Company table
+	 * and check if password is  equal to received password. 
+	 * If yes returns TRUE:FALSE. 
+	 * @see dao.CompanyDAO#logIn(java.lang.String, java.lang.String)
+	 * @param   - String Company Name , String Password  
+	 * @returns - Boolean (logged , failed)  
+	 * @throws  - CuponSystemException 
+	 */
+	public Boolean logIn(String compName, String passowrd) throws CouponSystemException {
 		Boolean result = false;
 		String query = "SELECT PASSWORD FROM COMPANY WHERE COMP_NAME =" + compName;
 		ConnectionPool pool = ConnectionPool.getConnectionPool();
@@ -169,13 +244,13 @@ public class CompanyDBDAO implements CompanyDAO {
 		try {
 			state = con.createStatement();
 		} catch (SQLException e) {
-			throw new CuponSystemException("Company name did not found, pls try again", e);
+			throw new CouponSystemException("Company name did not found, pls try again", e);
 		}
 		ResultSet rs;
 		try {
 			rs = state.executeQuery(query);
 		} catch (SQLException e) {
-			throw new CuponSystemException("Failed to get user details from Data Base", e);
+			throw new CouponSystemException("Failed to get user details from Data Base", e);
 		}
 
 		try {
@@ -185,7 +260,7 @@ public class CompanyDBDAO implements CompanyDAO {
 				System.out.println("Wrong password , pls try again");
 			}
 		} catch (SQLException e) {
-			throw new CuponSystemException("Failed to retrive password from DATA BASE", e);
+			throw new CouponSystemException("Failed to retrive password from DATA BASE", e);
 		} finally {
 			pool.returnConnection(con);
 		}

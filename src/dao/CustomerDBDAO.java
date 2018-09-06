@@ -7,13 +7,20 @@ import java.sql.Statement;
 import java.util.Collection;
 import java.util.HashSet;
 import beans.Customer;
-import couponSystemException.CuponSystemException;
+import couponSystemException.CouponSystemException;
 import dbConnectionPool.ConnectionPool;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CustomerDBDAO.
+ */
 public class CustomerDBDAO implements CustomerDAO {
-
+	
+	/** 
+	 * @see dao.CustomerDAO#createCustomer(beans.Customer)
+	 */
 	@Override // new test 
-	public void createCustomer(Customer customer) throws CuponSystemException {
+	public void createCustomer(Customer customer) throws CouponSystemException {
 		ConnectionPool pool = ConnectionPool.getConnectionPool();
 		Connection con = pool.getConnection();
 		String sql = "INSERT INTO Customer (ID , CUST_NAME, PASSWORD) VALUES (? , ? , ?)";
@@ -24,13 +31,16 @@ public class CustomerDBDAO implements CustomerDAO {
 		st.setString(3, customer.getPassword());
 		st.executeUpdate();
 		} catch (SQLException e) {
-		throw new CuponSystemException ("Failed to create new Customer", e); 
+		throw new CouponSystemException ("Failed to create new Customer", e); 
 		}finally {pool.returnConnection(con);}
 		
 	}
 
+	/**
+	 * @see dao.CustomerDAO#removeCustomer(beans.Customer)
+	 */
 	@Override // need test
-	public void removeCustomer(Customer customer) throws CuponSystemException {
+	public void removeCustomer(Customer customer) throws CouponSystemException {
 		ConnectionPool pool = ConnectionPool.getConnectionPool();
 		Connection con = pool.getConnection();
 		String sql = "DELETE  FROM CUSTOMER WHERE ID=" + customer.getId(); 
@@ -39,7 +49,7 @@ public class CustomerDBDAO implements CustomerDAO {
 			st = con.createStatement();
 			st.executeUpdate(sql);
 		} catch (SQLException e) {
-			throw new CuponSystemException("Failed to delete Customer with id = " + customer.getId() + " " , e);
+			throw new CouponSystemException("Failed to delete Customer with id = " + customer.getId() + " " , e);
 		} finally {pool.returnConnection(con);}
 
 		
@@ -47,8 +57,11 @@ public class CustomerDBDAO implements CustomerDAO {
 		
 	}
 
+	/** 
+	 * @see dao.CustomerDAO#updateCustomer(beans.Customer)
+	 */
 	@Override // need test 
-	public void updateCustomer(Customer customer) throws CuponSystemException {
+	public void updateCustomer(Customer customer) throws CouponSystemException {
 		ConnectionPool pool = ConnectionPool.getConnectionPool();
 		Connection con = pool.getConnection();
 		String sql = "UPDATE CUSTOMER  SET  ID =  ? , CUST_NAME  = ? , PASSWORD = ?  WHERE ID= "  + customer.getId() ; 
@@ -59,12 +72,15 @@ public class CustomerDBDAO implements CustomerDAO {
 		st.setString(3, customer.getPassword());
 		st.executeUpdate();
 		} catch (SQLException e) {
-		throw new CuponSystemException("Failed to updated customer with id = " + customer.getId() + " ",e);
+		throw new CouponSystemException("Failed to updated customer with id = " + customer.getId() + " ",e);
 		} finally {pool.returnConnection(con);}
 	}
 
+	/**
+	 * @see dao.CustomerDAO#getCustomer(long)
+	 */
 	@Override
-	public Customer getCustomer(long id) throws CuponSystemException {
+	public Customer getCustomer(long id) throws CouponSystemException {
 		Customer customer = new Customer(id, null, null);
 		ConnectionPool pool = ConnectionPool.getConnectionPool();
 		String query = "SELECT * FROM CUSTOMER WHERE id = " + id ; 
@@ -82,14 +98,17 @@ public class CustomerDBDAO implements CustomerDAO {
 				System.out.println("Customer with id = " +  id + "does not exsist");
 			}
 		} catch (SQLException e) {
-			throw new CuponSystemException ("Failed to get Customer with id=" + id  , e ) ; 
+			throw new CouponSystemException ("Failed to get Customer with id=" + id  , e ) ; 
 		}finally {pool.returnConnection(con);}
 		
 		return customer;
 	}
 
+	/**
+	 * @see dao.CustomerDAO#getAllCustomers()
+	 */
 	@Override
-	public Collection<Customer> getAllCustomers() throws CuponSystemException {
+	public Collection<Customer> getAllCustomers() throws CouponSystemException {
 		Collection<Customer> customerList = new HashSet<Customer>();		
 		ConnectionPool pool = ConnectionPool.getConnectionPool();
 		Connection con = pool.getConnection();
@@ -102,12 +121,15 @@ public class CustomerDBDAO implements CustomerDAO {
 			customerList.add(new Customer(rs.getLong("ID"), rs.getString("CUST_NAME"), rs.getString("PASSWORD")));
 			}
 			} catch (SQLException e) {
-			throw new CuponSystemException ("Failed to get all Customers from data base" , e);
+			throw new CouponSystemException ("Failed to get all Customers from data base" , e);
 		} finally {pool.returnConnection(con);}
 		
 		return customerList;
 	}
 
+	/**
+	 * @see dao.CustomerDAO#login(java.lang.String, java.lang.String)
+	 */
 	@Override
 	public boolean login(String custName, String password) {
 		// TODO Auto-generated method stub

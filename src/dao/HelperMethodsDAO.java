@@ -9,7 +9,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import beans.Coupon;
 import beans.CouponType;
-import couponSystemException.CuponSystemException;
+import couponSystemException.CouponSystemException;
 import dbConnectionPool.ConnectionPool;
 import facades.AdminFacadeF;
 import facades.CompanyFacadeF;
@@ -19,7 +19,7 @@ import facades.Facade;
 public class HelperMethodsDAO implements HelperMethods {
 
 	@Override
-	public boolean ifExsist(String sqlTable, String column, String item) throws CuponSystemException {
+	public boolean ifExist(String sqlTable, String column, String item) throws CouponSystemException {
 		boolean result = false;
 		String sql = "SELECT * FROM " + sqlTable + "  WHERE " + column + " =  ?";
 		ConnectionPool pool = ConnectionPool.getConnectionPool();
@@ -35,7 +35,7 @@ public class HelperMethodsDAO implements HelperMethods {
 				result = false;
 			}
 		} catch (SQLException e) {
-			throw new CuponSystemException("Failed to calculate the query ", e);
+			throw new CouponSystemException("Failed to calculate the query ", e);
 		} finally {
 			pool.returnConnection(con);
 		}
@@ -43,7 +43,7 @@ public class HelperMethodsDAO implements HelperMethods {
 	}
 
 	@Override
-	public void removeWhere(String sqlTable, String column, long id) throws CuponSystemException {
+	public void removeWhere(String sqlTable, String column, long id) throws CouponSystemException {
 		String sql = "DELETE FROM " + sqlTable + " WHERE " + column + " = ?";
 		ConnectionPool pool = ConnectionPool.getConnectionPool();
 		Connection con = pool.getConnection();
@@ -53,7 +53,7 @@ public class HelperMethodsDAO implements HelperMethods {
 			st.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new CuponSystemException("Failed to delete needed coupon ", e);
+			throw new CouponSystemException("Failed to delete needed coupon ", e);
 		} finally {
 			pool.returnConnection(con);
 		}
@@ -62,7 +62,7 @@ public class HelperMethodsDAO implements HelperMethods {
 
 	@Override
 	public Collection<Long> getCouponsBelongTo(String getColumn, String sqlTable, String whereColumn, long id)
-			throws CuponSystemException {
+			throws CouponSystemException {
 		Collection<Long> couponsList = new HashSet<Long>();
 		ConnectionPool pool = ConnectionPool.getConnectionPool();
 		Connection con = pool.getConnection();
@@ -75,7 +75,7 @@ public class HelperMethodsDAO implements HelperMethods {
 				couponsList.add(rs.getLong(getColumn));
 			}
 		} catch (SQLException e) {
-			throw new CuponSystemException("Failed to execute the SQL query ", e);
+			throw new CouponSystemException("Failed to execute the SQL query ", e);
 		} finally {
 			pool.returnConnection(con);
 		}
@@ -83,7 +83,7 @@ public class HelperMethodsDAO implements HelperMethods {
 	}
 
 	@Override
-	public Collection<Coupon> getCouponSelected(long id, String select, String refernce) throws CuponSystemException {
+	public Collection<Coupon> getCouponSelected(long id, String select, String refernce) throws CouponSystemException {
 		Collection<Coupon> selectedCoupons = new HashSet<Coupon>();
 		String sql = null;
 		switch (select) {
@@ -139,7 +139,7 @@ public class HelperMethodsDAO implements HelperMethods {
 	}
 
 	@Override
-	public void buyCoupon(String customerId, String couponId) throws CuponSystemException {
+	public void buyCoupon(String customerId, String couponId) throws CouponSystemException {
 		ConnectionPool pool = ConnectionPool.getConnectionPool();
 		Connection con = pool.getConnection();
 		try {
@@ -147,7 +147,7 @@ public class HelperMethodsDAO implements HelperMethods {
 			Statement st = con.createStatement();
 			st.executeUpdate(sql);
 		} catch (SQLException e) {
-			throw new CuponSystemException("Failed updateing coupon purchase ", e);
+			throw new CouponSystemException("Failed updateing coupon purchase ", e);
 		} finally {
 			pool.returnConnection(con);
 		}
@@ -155,7 +155,7 @@ public class HelperMethodsDAO implements HelperMethods {
 	}
 
 	@Override
-	public void createCopuon(String companyId, String couponId) throws CuponSystemException {
+	public void createCopuon(String companyId, String couponId) throws CouponSystemException {
 		ConnectionPool pool = ConnectionPool.getConnectionPool();
 		Connection con = pool.getConnection();
 		try {
@@ -163,7 +163,7 @@ public class HelperMethodsDAO implements HelperMethods {
 			Statement st = con.createStatement();
 			st.executeUpdate(sql);
 		} catch (SQLException e) {
-			throw new CuponSystemException("Failed updateing coupon purchase ", e);
+			throw new CouponSystemException("Failed updateing coupon purchase ", e);
 		} finally {
 			pool.returnConnection(con);
 		}
@@ -171,7 +171,7 @@ public class HelperMethodsDAO implements HelperMethods {
 	}
 
 	@Override
-	public Facade logIn(String userType, String userName, String password) throws CuponSystemException {
+	public Facade logIn(String userType, String userName, String password) throws CouponSystemException {
 		ConnectionPool pool = ConnectionPool.getConnectionPool();
 		Connection con = pool.getConnection();
 		Facade facade = null;
@@ -225,13 +225,13 @@ public class HelperMethodsDAO implements HelperMethods {
 			}
 			}
 		} catch (SQLException e) {
-			throw new CuponSystemException("Failed to LogON, please try again", e);
+			throw new CouponSystemException("Failed to LogON, please try again", e);
 		}
 		return facade;
 	}
 
 	@Override
-	public long getId(String typeId) throws CuponSystemException {
+	public long getId(String typeId) throws CouponSystemException {
 		long id = 0;
 		String sql = null;
 		ConnectionPool pool = ConnectionPool.getConnectionPool();
@@ -259,7 +259,7 @@ public class HelperMethodsDAO implements HelperMethods {
 			st.executeUpdate(sqlUpdate);
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new CuponSystemException("Failed to crete new ID ", e);
+			throw new CouponSystemException("Failed to crete new ID ", e);
 		} finally {
 			pool.returnConnection(con);
 		}

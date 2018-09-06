@@ -1,5 +1,5 @@
 package couponTests;
-import couponSystemException.CuponSystemException;
+import couponSystemException.CouponSystemException;
 import dao.CompanyDBDAO;
 import dao.CuoponDBDAO;
 import dao.CustomerDBDAO;
@@ -32,7 +32,7 @@ public class CouponSystem {
 	 Facade facade =null;
 	 try {
 		facade = helper.logIn(userType, userName, password);
-	} catch (CuponSystemException e) {
+	} catch (CouponSystemException e) {
 		e.getMessage();
 	}
 
@@ -43,7 +43,7 @@ public class CouponSystem {
 		ConnectionPool pool = ConnectionPool.getConnectionPool();
 		try {
 			pool.closeConnections();
-		} catch (CuponSystemException e) {
+		} catch (CouponSystemException e) {
 			e.getMessage();
 		}
 	}

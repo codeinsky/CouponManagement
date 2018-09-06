@@ -4,12 +4,23 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import couponSystemException.CuponSystemException;
+import couponSystemException.CouponSystemException;
 import dbConnectionPool.ConnectionPool;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DropAllTables.
+ */
 public class DropAllTables {
 
-	public static void main(String[] args) throws SQLException, CuponSystemException {
+	/**
+	 * The main method.
+	 * MAIN method DELETE(DROPS) ALL SQL TABLES in case or reset of the system or for tests
+	 * @param args the arguments
+	 * @throws SQLException the SQL exception
+	 * @throws CouponSystemException the coupon system exception
+	 */
+	public static void main(String[] args) throws SQLException, CouponSystemException {
 		// TODO Auto-generated method stub
 		String[] statements = new String[8];
 		statements[0]="DROP TABLE Company ";
