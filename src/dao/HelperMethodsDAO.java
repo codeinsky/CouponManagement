@@ -16,8 +16,15 @@ import facades.CompanyFacadeF;
 import facades.CustomerFacadeF;
 import facades.Facade;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class HelperMethodsDAO.
+ */
 public class HelperMethodsDAO implements HelperMethods {
 
+	/** 
+	 * @see dao.HelperMethods#ifExist(java.lang.String, java.lang.String, java.lang.String)
+	 */
 	@Override
 	public boolean ifExist(String sqlTable, String column, String item) throws CouponSystemException {
 		boolean result = false;
@@ -35,13 +42,16 @@ public class HelperMethodsDAO implements HelperMethods {
 				result = false;
 			}
 		} catch (SQLException e) {
-			throw new CouponSystemException("Failed to calculate the query ", e);
+			throw new CouponSystemException("Failed to calculate the query ");
 		} finally {
 			pool.returnConnection(con);
 		}
 		return result;
 	}
 
+	/** 
+	 * @see dao.HelperMethods#removeWhere(java.lang.String, java.lang.String, long)
+	 */
 	@Override
 	public void removeWhere(String sqlTable, String column, long id) throws CouponSystemException {
 		String sql = "DELETE FROM " + sqlTable + " WHERE " + column + " = ?";
@@ -53,13 +63,16 @@ public class HelperMethodsDAO implements HelperMethods {
 			st.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new CouponSystemException("Failed to delete needed coupon ", e);
+			throw new CouponSystemException("Failed to delete needed coupon ");
 		} finally {
 			pool.returnConnection(con);
 		}
 
 	}
 
+	/** 
+	 * @see dao.HelperMethods#getCouponsBelongTo(java.lang.String, java.lang.String, java.lang.String, long)
+	 */
 	@Override
 	public Collection<Long> getCouponsBelongTo(String getColumn, String sqlTable, String whereColumn, long id)
 			throws CouponSystemException {
@@ -75,13 +88,16 @@ public class HelperMethodsDAO implements HelperMethods {
 				couponsList.add(rs.getLong(getColumn));
 			}
 		} catch (SQLException e) {
-			throw new CouponSystemException("Failed to execute the SQL query ", e);
+			throw new CouponSystemException("Failed to execute the SQL query ");
 		} finally {
 			pool.returnConnection(con);
 		}
 		return couponsList;
 	}
 
+	/** 
+	 * @see dao.HelperMethods#getCouponSelected(long, java.lang.String, java.lang.String)
+	 */
 	@Override
 	public Collection<Coupon> getCouponSelected(long id, String select, String refernce) throws CouponSystemException {
 		Collection<Coupon> selectedCoupons = new HashSet<Coupon>();
@@ -130,7 +146,7 @@ public class HelperMethodsDAO implements HelperMethods {
 						rs.getString("MESSAGE"), rs.getDouble("PRICE"), rs.getString("IMAGE")));
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new CouponSystemException ("Failed filtering coupons from Data Base"); 
 		} finally {
 			pool.returnConnection(con);
 		}
@@ -138,6 +154,9 @@ public class HelperMethodsDAO implements HelperMethods {
 		return selectedCoupons;
 	}
 
+	/** 
+	 * @see dao.HelperMethods#buyCoupon(java.lang.String, java.lang.String)
+	 */
 	@Override
 	public void buyCoupon(String customerId, String couponId) throws CouponSystemException {
 		ConnectionPool pool = ConnectionPool.getConnectionPool();
@@ -154,6 +173,9 @@ public class HelperMethodsDAO implements HelperMethods {
 
 	}
 
+	/** 
+	 * @see dao.HelperMethods#createCopuon(java.lang.String, java.lang.String)
+	 */
 	@Override
 	public void createCopuon(String companyId, String couponId) throws CouponSystemException {
 		ConnectionPool pool = ConnectionPool.getConnectionPool();
@@ -170,6 +192,9 @@ public class HelperMethodsDAO implements HelperMethods {
 
 	}
 
+	/** 
+	 * @see dao.HelperMethods#logIn(java.lang.String, java.lang.String, java.lang.String)
+	 */
 	@Override
 	public Facade logIn(String userType, String userName, String password) throws CouponSystemException {
 		ConnectionPool pool = ConnectionPool.getConnectionPool();
@@ -230,6 +255,9 @@ public class HelperMethodsDAO implements HelperMethods {
 		return facade;
 	}
 
+	/** 
+	 * @see dao.HelperMethods#getId(java.lang.String)
+	 */
 	@Override
 	public long getId(String typeId) throws CouponSystemException {
 		long id = 0;

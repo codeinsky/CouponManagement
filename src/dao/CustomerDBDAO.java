@@ -31,7 +31,7 @@ public class CustomerDBDAO implements CustomerDAO {
 		st.setString(3, customer.getPassword());
 		st.executeUpdate();
 		} catch (SQLException e) {
-		throw new CouponSystemException ("Failed to create new Customer", e); 
+		throw new CouponSystemException ("Failed to create new Customer"); 
 		}finally {pool.returnConnection(con);}
 		
 	}
@@ -49,7 +49,7 @@ public class CustomerDBDAO implements CustomerDAO {
 			st = con.createStatement();
 			st.executeUpdate(sql);
 		} catch (SQLException e) {
-			throw new CouponSystemException("Failed to delete Customer with id = " + customer.getId() + " " , e);
+			throw new CouponSystemException("Failed to delete Customer with id = " + customer.getId() + " ");
 		} finally {pool.returnConnection(con);}
 
 		
@@ -72,7 +72,7 @@ public class CustomerDBDAO implements CustomerDAO {
 		st.setString(3, customer.getPassword());
 		st.executeUpdate();
 		} catch (SQLException e) {
-		throw new CouponSystemException("Failed to updated customer with id = " + customer.getId() + " ",e);
+		throw new CouponSystemException("Failed to updated customer with id = " + customer.getId() + " ");
 		} finally {pool.returnConnection(con);}
 	}
 
@@ -98,7 +98,7 @@ public class CustomerDBDAO implements CustomerDAO {
 				System.out.println("Customer with id = " +  id + "does not exsist");
 			}
 		} catch (SQLException e) {
-			throw new CouponSystemException ("Failed to get Customer with id=" + id  , e ) ; 
+			throw new CouponSystemException ("Failed to get Customer with id=" + id  ) ; 
 		}finally {pool.returnConnection(con);}
 		
 		return customer;
@@ -121,7 +121,7 @@ public class CustomerDBDAO implements CustomerDAO {
 			customerList.add(new Customer(rs.getLong("ID"), rs.getString("CUST_NAME"), rs.getString("PASSWORD")));
 			}
 			} catch (SQLException e) {
-			throw new CouponSystemException ("Failed to get all Customers from data base" , e);
+			throw new CouponSystemException ("Failed to get all Customers from data base");
 		} finally {pool.returnConnection(con);}
 		
 		return customerList;

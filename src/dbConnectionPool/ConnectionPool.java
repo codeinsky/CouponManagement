@@ -144,11 +144,10 @@ public class ConnectionPool {
 		}
 	}
 
-	// Single ton of a ConnectionPool Class create and return to the main class
-
+	
 	/**
 	 * Gets the connection pool.
-	 *
+	 * Single ton get method 
 	 * @return the connection pool
 	 */
 	public static ConnectionPool getConnectionPool() {

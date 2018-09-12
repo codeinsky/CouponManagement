@@ -54,7 +54,7 @@ public interface CuoponDAO {
 	public Coupon getCoupon(long id) throws CouponSystemException; // test done - works
 
 	/**
-	 * Abstract method returns collection of CiuponsBeans, all coupons in Coupon Table   .
+	 * Abstract method returns collection of CouponsBeans, all coupons in Coupon Table   .
 	 *
 	 * @return Coupon Collection
 	 * @throws the coupon system exception
@@ -62,8 +62,8 @@ public interface CuoponDAO {
 	public Collection<Coupon> getAllCoupons() throws CouponSystemException; // test done - works ;
 	
 	/**
-	 * Abstract method , receives .
-	 *
+	 * Abstract method , receives Coupon Type and returns Collection of coupons with 
+	 * the requested type 
 	 * @param type the type
 	 * @return Coupon Collection
 	 * @throws the coupon system exception

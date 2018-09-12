@@ -10,17 +10,17 @@ package beans;
 public enum CouponType {
 	
 	/** The Resturans. */
-	Resturans, 
+	RESTAURANTS, 
  /** The Electricity. */
- Electricity, 
+ ELECTRICITY, 
  /** The Food. */
- Food, 
+ FOOD, 
  /** The Health. */
- Health, 
+ HRALTH, 
  /** The Sports. */
- Sports, 
+ SPORTS, 
  /** The Camping. */
- Camping, 
+ CAMPNIG, 
  /** The Traveling. */
- Travelling
+ TRAVELLING
 }

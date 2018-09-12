@@ -12,17 +12,36 @@ import dao.CustomerDBDAO;
 import dao.HelperMethodsDAO;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AdminFacadeF.
+ * Includes all Admin business logic methods 
+ */
 public class AdminFacadeF extends Facade{
+	
+	/** The company DAO. */
 	CompanyDBDAO companyDAO = new CompanyDBDAO();
+	
+	/** The customer DAO. */
 	CustomerDBDAO customerDAO = new CustomerDBDAO();
+	
+	/** The coupon DAO. */
 	CuoponDBDAO couponDAO = new CuoponDBDAO();
+	
+	/** The helper DAO. */
 	HelperMethodsDAO helperDAO = new HelperMethodsDAO();
 
+	/**
+	 * Creates the company.
+	 * Method receives Company bean. Checks if already exist company with 
+	 * same name, If not performs createCopmany method. 
+	 * @param company the company
+	 */
 	// CreateCompany tested and works
 	public void createCompany(Company company) {
 		// check if the Company name already exists
 		try {
-			if (helperDAO.ifExist("COMPANY", "COMP_NAME", company.getCompName())) { // need test
+			if (helperDAO.ifExist("COMPANY", "COMP_NAME", company.getCompName())) { 
 				System.out.println("Company with name = " + company.getCompName() + " already exsists");
 			} else {
 				company.setId(helperDAO.getId("COMPANY_ID"));
@@ -34,8 +53,17 @@ public class AdminFacadeF extends Facade{
 
 	}
 
-	// need test that all coupons belong to the company getting deleted as well
-	// ??????
+	
+	/**
+	 * Removes the company.
+	 * Method receives company bean.
+	 * Gets all coupons belongs to the company.
+	 * Uses helper method helperDAO.removeWhere 
+	 * by Coupon Id removes all coupons from tables(Coupon,Customer_Coupon, Copmany_Coupon)
+	 * removes the company from Company table as well
+	 * @param company the company
+	 */
+	
 	public void removeCompany(Company company) {
 
 		try {
@@ -53,6 +81,14 @@ public class AdminFacadeF extends Facade{
 		}
 	}
 
+	/**
+	 * Company details update.
+	 * Receives Company bean,  the company from DataBase by Id.
+	 * Checks if User tries to update name (different name):
+	 * 		-if yes, denies the action 
+	 * 		-if no updates(overwrites all attributes)  
+	 * @param company the company
+	 */
 	// tested and works
 	public void companyDetailsUpdate(Company company) {
 		// COMPANY NAME CAN NOT BE CHANGED
@@ -72,6 +108,11 @@ public class AdminFacadeF extends Facade{
 		}
 	}
 
+	/**
+	 * Gets the all companies.
+	 * 
+	 * @return the all companies existing in Data Base
+	 */
 	// tested and works
 	public Collection<Company> getAllCompanies() {
 		Collection<Company> companies = null;
@@ -83,6 +124,12 @@ public class AdminFacadeF extends Facade{
 		return companies;
 	}
 
+	/**
+	 * Gets the company by ID 
+	 *
+	 * @param id the id
+	 * @return the company
+	 */
 	// tested and works
 	public Company getCompany(long id) {
 		Company company = null;
@@ -94,6 +141,14 @@ public class AdminFacadeF extends Facade{
 		return company;
 	}
 
+	/**
+	 * Adds the customer.
+	 * Receives Customer bean. Methods checks if Customer with that name 
+	 * all ready exists and if yes denies the action. 
+	 * If no Customer with the name creates new Id for the new customer 
+	 * and adds it to the Data Base in Customer table new row. 
+	 * @param customer the customer
+	 */
 	// Tested and works
 	public void addCustomer(Customer customer) {
 		// need check if there is already customer with same name
@@ -110,6 +165,12 @@ public class AdminFacadeF extends Facade{
 
 	}
 
+	/**
+	 * Removes the customer.
+	 * Removes Customers Coupon from data base table Customer_Coupon. 
+	 * Removes the customer from Customer table as well.
+	 * @param customer the customer
+	 */
 	// Need test when coupon purchase will be ready
 	public void removeCustomer(Customer customer) {
 		// all coupons purchased by the Customer need to be "released" from the table
@@ -124,6 +185,13 @@ public class AdminFacadeF extends Facade{
 
 	}
 
+	/**
+	 * Update customer details.
+	 * Retries Customer from Data Base by ID. 
+	 * Checks if Admin tries to update Copamany name , denies the action.
+	 * If Customer Name is the same updates all attributes.   
+	 * @param customer the customer
+	 */
 	// Works , test done
 	public void updateCustomerDetails(Customer customer) {
 		try {
@@ -140,6 +208,11 @@ public class AdminFacadeF extends Facade{
 		}
 	}
 
+	/**
+	 * Gets the customer list.
+	 *
+	 * @return the customer list
+	 */
 	// test done , works
 	public Collection<Customer> getCustomerList() {
 		Collection<Customer> customerList = null;
@@ -151,6 +224,12 @@ public class AdminFacadeF extends Facade{
 		return customerList;
 	}
 
+	/**
+	 * Gets the customer by ID. 
+	 *
+	 * @param id the id
+	 * @return the customer
+	 */
 	// test done , works
 	public Customer getCustomer(long id) {
 		Customer customer = null;

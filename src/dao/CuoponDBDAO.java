@@ -56,7 +56,7 @@ public class CuoponDBDAO implements CuoponDAO {
 			state.setString(9, coupon.getImage());
 			state.execute();
 		} catch (SQLException e) {
-			throw new CouponSystemException("Failed to add new coupon to Data Base", e);
+			throw new CouponSystemException("Failed to add new coupon to Data Base");
 		} finally {
 			pool.returnConnection(con);
 		}
@@ -82,7 +82,7 @@ public class CuoponDBDAO implements CuoponDAO {
 			state.executeUpdate(sql);
 			System.out.println("Coupon with id=" + coupon.getId() + " was removed");
 		} catch (SQLException e) {
-			throw new CouponSystemException("Failed to remove coupon from DATA BASE ", e);
+			throw new CouponSystemException("Failed to remove coupon from DATA BASE ");
 		} finally {
 			pool.returnConnection(con);
 		}
@@ -116,7 +116,7 @@ public class CuoponDBDAO implements CuoponDAO {
 			state.setString(8, coupon.getImage());
 			state.executeUpdate();
 		} catch (SQLException e) {
-			throw new CouponSystemException("Failed to update coupon with id = " + coupon.getId(), e);
+			throw new CouponSystemException("Failed to update coupon with id = " + coupon.getId());
 		} finally {
 			pool.returnConnection(con);
 		}
@@ -157,7 +157,7 @@ public class CuoponDBDAO implements CuoponDAO {
 				System.out.println("Coupon with id = " + id + "does not exsist in the system");
 			}
 		} catch (SQLException e) {
-			throw new CouponSystemException("Failed to get coupon with id = " + id + " from the data base", e);
+			throw new CouponSystemException("Failed to get coupon with id = " + id + " from the data base");
 		} finally {
 			pool.returnConnection(con);
 		}
@@ -186,7 +186,7 @@ public class CuoponDBDAO implements CuoponDAO {
 						rs.getString("MESSAGE"), rs.getDouble("PRICE"), rs.getString("IMAGE")));
 			}
 		} catch (SQLException e) {
-			throw new CouponSystemException("Failed to get coupons list", e);
+			throw new CouponSystemException("Failed to get coupons list");
 		} finally {
 			pool.returnConnection(con);
 		}
@@ -223,7 +223,7 @@ public class CuoponDBDAO implements CuoponDAO {
 							rs.getString("MESSAGE"), rs.getDouble("PRICE"), rs.getString("IMAGE")));
 				} while (rs.next());
 		} catch (SQLException e) {
-			throw new CouponSystemException("Failed to get coupons from data base of type  " + type, e);
+			throw new CouponSystemException("Failed to get coupons from data base of type  " + type);
 		} finally {
 			pool.returnConnection(con);
 		}

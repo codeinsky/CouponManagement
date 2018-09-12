@@ -39,7 +39,14 @@ public class CustomerFacadeF extends Facade{
 	
 	/**
 	 * Purchase coupon.
-	 *
+	 * Before coupons been purchased Method checks 3 terms : 
+	 * 		1. Checks if coupons been already purchased by the Customer;
+	 * 		2. Checks if Coupon amount is more the 1; 
+	 * 		3. Checks if coupons that customer wants to buy is not expired 
+	 *  IF all terms are good: 
+	 *  	1.performs BUY 
+	 *  	@see dao.HelperMethods#buyCoupon(String, String);
+	 *  	2. Decrees coupons amount in data base 
 	 * @param coupon the coupon
 	 */
 	// works and tested
@@ -108,7 +115,7 @@ public class CustomerFacadeF extends Facade{
 
 	/**
 	 * Gets the all my coupons.
-	 *
+	 * Returns all copuns that were purchased by Logged Customer 
 	 * @return the all my coupons
 	 */
 	// works and tested
@@ -126,25 +133,27 @@ public class CustomerFacadeF extends Facade{
 		return myCoupons;
 	}
 
-	// getting coupons purchased by logged Customer
-	// to get coupons by PRICE pass select = " customerCouponsByPrice"
-	// to get coupons by DATE pass select = " customerCouponsByDate"
-	// to get coupons by TYPE pass select = " customerCouponsByType"
-	// reference pass :
-	//
-	// PRICE example till price reference = "300"
-	// DATE example till date reference = "MM-DD-YYYY"
-	// TYPE example till type reference = " Restrains,
-	// Electricity,
-	// Food,
-	// Health,
-	// Sports,
-	// Camping,
-	// Traveling"
+	
 	
 	
 	/**
 	 * Gets the my coupons sorted by type.
+	 *  getting coupons Collection filtered :
+	 * to get coupons by PRICE pass select = " customerCouponsByPrice"
+	 * to get coupons by DATE pass select = " customerCouponsByDate"
+	 * to get coupons by TYPE pass select = " customerCouponsByType"
+	 * reference pass :
+	
+	 * PRICE example till price reference = "300"
+	 * DATE example till date reference = "MM-DD-YYYY"
+	 * TYPE example till type reference = " Restrains,
+	 * Electricity,
+	 * Food,
+	 * Health,
+	 * Sports,
+	 * Camping,
+	 * Traveling"
+	 * 
 	 *
 	 * @param select the select
 	 * @param reference the reference

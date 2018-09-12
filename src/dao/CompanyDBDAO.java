@@ -47,7 +47,7 @@ public class CompanyDBDAO implements CompanyDAO {
 			state.setString(4, company.getEmail());
 			state.executeUpdate();
 		} catch (SQLException e) {
-			throw new CouponSystemException("Failed to add ne compnay in DataBase ", e);
+			throw new CouponSystemException("Failed to add ne compnay in DataBase ");
 		} finally {
 			pool.returnConnection(con);
 		}
@@ -77,7 +77,7 @@ public class CompanyDBDAO implements CompanyDAO {
 			state.executeUpdate();
 			System.out.println("company removed");
 		} catch (SQLException e) {
-			throw new CouponSystemException("Failed to remove the company", e);
+			throw new CouponSystemException("Failed to remove the company");
 		} finally {
 			pool.returnConnection(con);
 		}
@@ -107,7 +107,7 @@ public class CompanyDBDAO implements CompanyDAO {
 			state.setLong(4, company.getId());
 			state.executeUpdate();
 		} catch (SQLException e) {
-			throw new CouponSystemException("Failed to update the Copmany", e);
+			throw new CouponSystemException("Failed to update the Copmany");
 		} finally {
 			pool.returnConnection(con);
 		}
@@ -172,7 +172,7 @@ public class CompanyDBDAO implements CompanyDAO {
 						rs.getString("EMAIL")));
 			}
 		} catch (SQLException e) {
-			throw new CouponSystemException("Failed to get all Companies from DATA BASE", e);
+			throw new CouponSystemException("Failed to get all Companies from DATA BASE");
 		} finally {
 			pool.returnConnection(con);
 		}
@@ -206,7 +206,7 @@ public class CompanyDBDAO implements CompanyDAO {
 				couponIdList.add(rs.getLong("COUPON_ID"));
 			}
 		} catch (SQLException e) {
-			throw new CouponSystemException("Failed to get Coupons from Data Base", e);
+			throw new CouponSystemException("Failed to get Coupons from Data Base");
 		} finally {
 			pool.returnConnection(con);
 		}
@@ -244,13 +244,13 @@ public class CompanyDBDAO implements CompanyDAO {
 		try {
 			state = con.createStatement();
 		} catch (SQLException e) {
-			throw new CouponSystemException("Company name did not found, pls try again", e);
+			throw new CouponSystemException("Company name did not found, pls try again");
 		}
 		ResultSet rs;
 		try {
 			rs = state.executeQuery(query);
 		} catch (SQLException e) {
-			throw new CouponSystemException("Failed to get user details from Data Base", e);
+			throw new CouponSystemException("Failed to get user details from Data Base");
 		}
 
 		try {
@@ -260,7 +260,7 @@ public class CompanyDBDAO implements CompanyDAO {
 				System.out.println("Wrong password , pls try again");
 			}
 		} catch (SQLException e) {
-			throw new CouponSystemException("Failed to retrive password from DATA BASE", e);
+			throw new CouponSystemException("Failed to retrive password from DATA BASE");
 		} finally {
 			pool.returnConnection(con);
 		}
