@@ -12,15 +12,16 @@ public enum CouponType {
 	/** The Resturans. */
 	RESTAURANTS, 
  /** The Electricity. */
- ELECTRICITY, 
+	ELECTRICITY
+	, 
  /** The Food. */
- FOOD, 
+ Food, 
  /** The Health. */
- HRALTH, 
+ Health, 
  /** The Sports. */
- SPORTS, 
+ Sports, 
  /** The Camping. */
- CAMPNIG, 
+ Campning, 
  /** The Traveling. */
- TRAVELLING
+ Travelling
 }

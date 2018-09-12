@@ -162,7 +162,7 @@ public static void main(String[] args) {
 	
 	
 //											Admin Tests 
-//	AdminFacadeF admin = (AdminFacadeF) system.logIn("admin", "admin", "1234");
+	AdminFacadeF admin = (AdminFacadeF) system.logIn("admin", "admin", "1234");
 //	admin.createCompany(testCompany);
 //	admin.createCompany(testCompany1);
 //	admin.createCompany(testCompany2);
