@@ -103,6 +103,10 @@ public class HelperMethodsDAO implements HelperMethods {
 		Collection<Coupon> selectedCoupons = new HashSet<Coupon>();
 		String sql = null;
 		switch (select) {
+		case "Expired":
+			sql = "SELECT * FROM COUPON WHERE END_DATE < '" + refernce + "'";
+			System.out.println(sql);
+			break;
 		case "Type":
 			sql = "SELECT * FROM COUPON " + "INNER JOIN COMPANY_COUPON " + "ON Coupon.ID=company_coupon.COUPON_ID "
 					+ "WHERE TYPE = '" + refernce + "' " + "AND company_id = " + id;

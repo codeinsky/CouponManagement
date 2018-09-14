@@ -92,8 +92,8 @@ public static void main(String[] args) {
 	
 	// 								Thread Test 
 //	
-//	Thread thread = new Thread(new DailyCouponExpirationTask(false));
-//	thread.run();
+	Thread thread = new Thread(new DailyCouponExpirationTask(false));
+	thread.run();
 //	
 	//								Customer Test 
 	
@@ -155,7 +155,7 @@ public static void main(String[] args) {
 //	company.createCoupon(coupon2);
 //	company.createCoupon(coupon3);
 //	company.createCoupon(coupon4);
-	
+//	
 //	System.out.println(company.getCouponById(1));
 //	System.out.println(company.getAllCoupons());
 	//company.createCoupon(coupon);
