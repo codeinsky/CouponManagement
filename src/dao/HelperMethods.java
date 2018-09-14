@@ -4,7 +4,7 @@ import java.util.Collection;
 
 import beans.Coupon;
 import couponSystemException.CouponSystemException;
-import facades.Facade;
+import facades.ClientCouponFacade;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -134,7 +134,7 @@ public interface HelperMethods {
 	 * @return the facade
 	 * @throws CouponSystemException the coupon system exception
 	 */
-	public Facade logIn(String userType, String userName, String password) throws CouponSystemException;
+	public ClientCouponFacade logIn(String userType, String userName, String password) throws CouponSystemException;
 
 	/**
 	 * Gets the id.

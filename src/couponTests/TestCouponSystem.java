@@ -2,6 +2,7 @@ package couponTests;
 
 import java.sql.Date;
 
+import CouponSystem.CouponSystem;
 import beans.Company;
 import beans.Coupon;
 import beans.CouponType;
@@ -9,7 +10,6 @@ import beans.Customer;
 import facades.AdminFacadeF;
 import facades.CompanyFacadeF;
 import facades.CustomerFacadeF;
-import threads.DailyCouponExpirationTask;
 
 
 public class TestCouponSystem {
@@ -133,7 +133,7 @@ public static void main(String[] args) {
 	
 	
 //									Company Tests
-// CompanyFacadeF company = (CompanyFacadeF)system.logIn("company", "Amdocs", "3333");
+     CompanyFacadeF company = (CompanyFacadeF)system.logIn("company", "Amdocs", "3333");
 //	System.out.println(company.sortCouponBy("Type", "Sports"));
 //  company.sortCouponBy("Type", "Food").forEach(System.out::println);
 //  company.sortCouponBy("Type", "Sports").forEach(System.out::println);

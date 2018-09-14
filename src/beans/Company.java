@@ -6,8 +6,6 @@ import java.util.Collection;
 // TODO: Auto-generated Javadoc
 /**
  * The Class Company.
- *
- * @author Alexander
  * Company Class 
  *  - Attributes : id , compName , password , email, collection for Coupons; 
  *  - Coupon Collection : not used; instead exists Method "get all coupons" from DataBase 

@@ -5,8 +5,6 @@ import java.sql.Date;
 
 /**
  * The Class Coupon.
- *
- * @author Alexander
  * Coupon Class 
  *  - Attributes - id , startDate(yyyy-mm-dd), endDate, amount, 
  *  type(Enum) 

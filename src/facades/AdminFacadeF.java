@@ -15,9 +15,9 @@ import dao.HelperMethodsDAO;
 // TODO: Auto-generated Javadoc
 /**
  * The Class AdminFacadeF.
- * Includes all Admin business logic methods 
+ * Includes all Admins business logic methods 
  */
-public class AdminFacadeF extends Facade{
+public class AdminFacadeF extends ClientCouponFacade{
 	
 	/** The company DAO. */
 	CompanyDBDAO companyDAO = new CompanyDBDAO();
@@ -37,7 +37,7 @@ public class AdminFacadeF extends Facade{
 	 * same name, If not performs createCopmany method. 
 	 * @param company the company
 	 */
-	// CreateCompany tested and works
+
 	public void createCompany(Company company) {
 		// check if the Company name already exists
 		try {
@@ -89,7 +89,7 @@ public class AdminFacadeF extends Facade{
 	 * 		-if no updates(overwrites all attributes)  
 	 * @param company the company
 	 */
-	// tested and works
+	
 	public void companyDetailsUpdate(Company company) {
 		// COMPANY NAME CAN NOT BE CHANGED
 		try {
@@ -113,7 +113,7 @@ public class AdminFacadeF extends Facade{
 	 * 
 	 * @return the all companies existing in Data Base
 	 */
-	// tested and works
+	
 	public Collection<Company> getAllCompanies() {
 		Collection<Company> companies = null;
 		try {
@@ -130,7 +130,7 @@ public class AdminFacadeF extends Facade{
 	 * @param id the id
 	 * @return the company
 	 */
-	// tested and works
+
 	public Company getCompany(long id) {
 		Company company = null;
 		try {
@@ -149,7 +149,6 @@ public class AdminFacadeF extends Facade{
 	 * and adds it to the Data Base in Customer table new row. 
 	 * @param customer the customer
 	 */
-	// Tested and works
 	public void addCustomer(Customer customer) {
 		// need check if there is already customer with same name
 		try {
@@ -171,7 +170,7 @@ public class AdminFacadeF extends Facade{
 	 * Removes the customer from Customer table as well.
 	 * @param customer the customer
 	 */
-	// Need test when coupon purchase will be ready
+
 	public void removeCustomer(Customer customer) {
 		// all coupons purchased by the Customer need to be "released" from the table
 		// Customer-Coupon
@@ -192,7 +191,7 @@ public class AdminFacadeF extends Facade{
 	 * If Customer Name is the same updates all attributes.   
 	 * @param customer the customer
 	 */
-	// Works , test done
+	
 	public void updateCustomerDetails(Customer customer) {
 		try {
 			// checks if customer already exists and if the name is the same
@@ -213,7 +212,7 @@ public class AdminFacadeF extends Facade{
 	 *
 	 * @return the customer list
 	 */
-	// test done , works
+
 	public Collection<Customer> getCustomerList() {
 		Collection<Customer> customerList = null;
 		try {
@@ -230,7 +229,7 @@ public class AdminFacadeF extends Facade{
 	 * @param id the id
 	 * @return the customer
 	 */
-	// test done , works
+	
 	public Customer getCustomer(long id) {
 		Customer customer = null;
 		try {

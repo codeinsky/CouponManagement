@@ -8,7 +8,6 @@ import java.sql.SQLException;
 /**
  * The Class CuponSystemException.
  *
- * @author Alexander
  * CuponSystemException class, extends Exception class 
  */
 public class CouponSystemException extends Exception {

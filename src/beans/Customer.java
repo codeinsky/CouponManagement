@@ -7,30 +7,28 @@ import java.util.Collection;
 /**
  * The Class Customer.
  *
- * @author Alexander
- * Company Class
- *  - Attributes : id , custName , password ;
- *  - Constructor with all attributes  
- *  - Getter and Setters for each attribute
+ * 		   Company Class - Attributes : id , custName , password ; 
+ *         Constructor with all attributes - Getter and Setters for each
+ *         attribute
  */
 public class Customer {
-	
+
 	/** The id. */
 	private long id;
-	
+
 	/** The cust name. */
 	private String custName;
-	
+
 	/** The password. */
 	private String password;
-	
+
 	/** The coupon. */
 	private Collection<Coupon> coupon = new ArrayList<Coupon>();
 
 	/**
 	 * Instantiates a new customer.
 	 *
-	 * @param id the id
+	 * @param id       the id
 	 * @param custName the cust name
 	 * @param password the password
 	 */
@@ -95,7 +93,9 @@ public class Customer {
 		this.password = password;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override

@@ -19,7 +19,7 @@ public class CustomerDBDAO implements CustomerDAO {
 	/** 
 	 * @see dao.CustomerDAO#createCustomer(beans.Customer)
 	 */
-	@Override // new test 
+	@Override 
 	public void createCustomer(Customer customer) throws CouponSystemException {
 		ConnectionPool pool = ConnectionPool.getConnectionPool();
 		Connection con = pool.getConnection();
@@ -39,7 +39,7 @@ public class CustomerDBDAO implements CustomerDAO {
 	/**
 	 * @see dao.CustomerDAO#removeCustomer(beans.Customer)
 	 */
-	@Override // need test
+	@Override 
 	public void removeCustomer(Customer customer) throws CouponSystemException {
 		ConnectionPool pool = ConnectionPool.getConnectionPool();
 		Connection con = pool.getConnection();
@@ -60,7 +60,7 @@ public class CustomerDBDAO implements CustomerDAO {
 	/** 
 	 * @see dao.CustomerDAO#updateCustomer(beans.Customer)
 	 */
-	@Override // need test 
+	@Override 
 	public void updateCustomer(Customer customer) throws CouponSystemException {
 		ConnectionPool pool = ConnectionPool.getConnectionPool();
 		Connection con = pool.getConnection();
@@ -129,6 +129,7 @@ public class CustomerDBDAO implements CustomerDAO {
 
 	/**
 	 * @see dao.CustomerDAO#login(java.lang.String, java.lang.String)
+	 * Not used see {@link dao.HelperMethods#logIn(String, String, String)}
 	 */
 	@Override
 	public boolean login(String custName, String password) {

@@ -16,7 +16,7 @@ import dao.HelperMethodsDAO;
 /**
  * The Class CustomerFacadeF.
  */
-public class CustomerFacadeF extends Facade{
+public class CustomerFacadeF extends ClientCouponFacade{
 	
 	/** The customer logged. */
 	long customerLogged;
@@ -49,7 +49,7 @@ public class CustomerFacadeF extends Facade{
 	 *  	2. Decrees coupons amount in data base 
 	 * @param coupon the coupon
 	 */
-	// works and tested
+
 	public void purchaseCoupon(Coupon coupon) {
 		Coupon checkedCoupon = null;
 		boolean dateFlag = false;
@@ -118,7 +118,7 @@ public class CustomerFacadeF extends Facade{
 	 * Returns all copuns that were purchased by Logged Customer 
 	 * @return the all my coupons
 	 */
-	// works and tested
+
 	public Collection<Coupon> getAllMyCoupons() {
 		Collection<Coupon> myCoupons = new HashSet<Coupon>();
 		Collection<Long> couponsId = null;

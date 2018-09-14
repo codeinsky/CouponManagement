@@ -14,7 +14,7 @@ import dbConnectionPool.ConnectionPool;
 import facades.AdminFacadeF;
 import facades.CompanyFacadeF;
 import facades.CustomerFacadeF;
-import facades.Facade;
+import facades.ClientCouponFacade;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -196,10 +196,10 @@ public class HelperMethodsDAO implements HelperMethods {
 	 * @see dao.HelperMethods#logIn(java.lang.String, java.lang.String, java.lang.String)
 	 */
 	@Override
-	public Facade logIn(String userType, String userName, String password) throws CouponSystemException {
+	public ClientCouponFacade logIn(String userType, String userName, String password) throws CouponSystemException {
 		ConnectionPool pool = ConnectionPool.getConnectionPool();
 		Connection con = pool.getConnection();
-		Facade facade = null;
+		ClientCouponFacade facade = null;
 		try {
 			switch (userType) {
 			case "admin": {

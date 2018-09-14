@@ -1,4 +1,4 @@
-package threads;
+package CouponSystem;
 
 import java.sql.Connection;
 import java.sql.Date;

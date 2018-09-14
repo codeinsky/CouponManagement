@@ -16,20 +16,19 @@ import dbConnectionPool.ConnectionPool;
 /**
  * The Class CompanyDBDAO.
  *
- * @author Alexander
- * CompanyDBDAO class includes methods based on CompanyDAO interface. 
- * Operations with DataBase Company table
+ * CompanyDBDAO class includes methods based on CompanyDAO interface. Operations
+ * with DataBase Company table
  */
 public class CompanyDBDAO implements CompanyDAO {
 
-		
 	@Override
 	/**
 	 * 
-	 * CreateCompany void method receives Company bean. 
-	 * Creates new row in Company table and inputs all Company attributes.
+	 * CreateCompanyis a void method receives Company bean. Creates new row in
+	 * Company table and inputs all Company attributes.
+	 * 
 	 * @see dao.CompanyDAO#createCompany(beans.Company)
-	 * @param  - Company bean. 
+	 * @param - Company bean.
 	 * @throws - CuponSystemException
 	 */
 	public void createCompany(Company company) throws CouponSystemException {
@@ -53,17 +52,17 @@ public class CompanyDBDAO implements CompanyDAO {
 		}
 
 	}
-	
-	
+
 	@Override
-	
+
 	/**
-	 * RemoveCompany void method receives Company bean.
-	 * Looks for existing company in DataBase Company table per Company ID. 
-	 * Deletes the company from DataBase Company Table. 
+	 * RemoveCompany is a void method receives Company bean. Looks for existing
+	 * company in DataBase Company table per Company ID. Deletes the company from
+	 * DataBase Company Table.
+	 * 
 	 * @see dao.CompanyDAO#removeCompany(beans.Company)
-	 * @param  - Company bean 
-	 * @throws - CuponSystemException 
+	 * @param - Company bean
+	 * @throws - CuponSystemException
 	 */
 	public void removeCompany(Company company) throws CouponSystemException {
 		ConnectionPool pool = ConnectionPool.getConnectionPool();
@@ -83,16 +82,16 @@ public class CompanyDBDAO implements CompanyDAO {
 		}
 
 	}
-	
-	
-	@Override 
+
+	@Override
 	/**
 	 * 
-	 * UpdateCompany void method receives Company bean. Looks for exiting Company in DataBase Company
-	 * table with same ID and  all attributes except ID.  
+	 * UpdateCompany is a void method receives Company bean. Looks for exiting
+	 * Company in DataBase Company table with same ID and all attributes except ID.
+	 * 
 	 * @see dao.CompanyDAO#updateCompany(beans.Company)
-	 * @param  - Company bean 
-	 * @throws - CuponSystemException 
+	 * @param - Company bean
+	 * @throws - CuponSystemException
 	 */
 	public void updateCompany(Company company) throws CouponSystemException {
 		ConnectionPool pool = ConnectionPool.getConnectionPool();
@@ -113,16 +112,15 @@ public class CompanyDBDAO implements CompanyDAO {
 		}
 	}
 
-	
 	@Override
 	/**
-	 * GetCompany method receives Company ID. 
-	 * Search for the existing company in DataBase Company table with same ID.
-	 * Returns Company bean. 
+	 * GetCompany is a method receives Company ID. Search for the existing company
+	 * in DataBase Company table with same ID. Returns Company bean.
+	 * 
 	 * @see dao.CompanyDAO#getCompany(long)
-	 * @param   - ID long 
-	 * @returns - Company bean 
-	 * @throws  - CuponSystemException 
+	 * @param - ID long
+	 * @returns - Company bean
+	 * @throws - CuponSystemException
 	 */
 	public Company getCompany(long id) throws CouponSystemException {
 		ConnectionPool pool = ConnectionPool.getConnectionPool();
@@ -153,10 +151,12 @@ public class CompanyDBDAO implements CompanyDAO {
 
 	@Override
 	/**
-	 * GetAllCopmanies - Method returns Company Collection - all existing companies in DataBase company table 
+	 * GetAllCopmanies is a Method returns Company Collection - all existing
+	 * companies in DataBase company table
+	 * 
 	 * @see dao.CompanyDAO#getAllCompanies()
-	 * @returns - Company Collection 
-	 * @throws  - CuponSystemException 
+	 * @returns - Company Collection
+	 * @throws - CuponSystemException
 	 */
 	public Collection<Company> getAllCompanies() throws CouponSystemException {
 		Collection<Company> companyList = new HashSet<Company>();
@@ -179,20 +179,18 @@ public class CompanyDBDAO implements CompanyDAO {
 		return companyList;
 	}
 
-	
 	@Override
 	/**
-	 * GetCopuns method receives Company bean. 
-	 * Puts all Coupons ID belongs to the company in ID Collection (couponIdList)
-	 * Based on ID collection method all Coupon beans and puts into (couponList)
-	 * Returns couponList  
+	 * GetCopuns method receives Company bean. Puts all Coupons ID belongs to the
+	 * company in ID Collection (couponIdList).Based on ID collection method
+	 * collects all coupons beans to new collection and returns it.
+	 * 
 	 * @see dao.CompanyDAO#getCoupons(beans.Company)
-	 * @param   - Company bean  
-	 * @returns - Coupon Collection.  
-	 * @throws  - CuponSystemException 
+	 * @param - Company bean
+	 * @returns - Coupon Collection.
+	 * @throws - CuponSystemException
 	 */
-	// need run check with main , need to finish at home collection adding
-	// need to test with main , very important ! ! ! ! ! ! ! ! ! ! ! ! !
+
 	public Collection<Coupon> getCoupons(Company company) throws CouponSystemException {
 		Collection<Coupon> couponList = new HashSet<Coupon>(); // Collection of coupons returned by the method
 		Collection<Long> couponIdList = new HashSet<Long>(); // List with all coupons ID's belong to Company
@@ -222,18 +220,17 @@ public class CompanyDBDAO implements CompanyDAO {
 
 	}
 
-	
-	@Override 
-	
+	@Override
+
 	/**
-	 * LogIn method receives Company Name and Password. 
-	 * Looks for existing company in DataBase Company table
-	 * and check if password is  equal to received password. 
-	 * If yes returns TRUE:FALSE. 
+	 * LogIn method receives Company Name and Password. Looks for existing company
+	 * in DataBase Company table and check if password is equal to received
+	 * password. If yes returns TRUE:FALSE.
+	 * 
 	 * @see dao.CompanyDAO#logIn(java.lang.String, java.lang.String)
-	 * @param   - String Company Name , String Password  
-	 * @returns - Boolean (logged , failed)  
-	 * @throws  - CuponSystemException 
+	 * @param - String Company Name , String Password
+	 * @returns - Boolean (logged , failed)
+	 * @throws - CuponSystemException
 	 */
 	public Boolean logIn(String compName, String passowrd) throws CouponSystemException {
 		Boolean result = false;

@@ -12,7 +12,7 @@ import dao.HelperMethodsDAO;
 /**
  * The Class CompanyFacadeF.
  */
-public class CompanyFacadeF extends Facade {
+public class CompanyFacadeF extends ClientCouponFacade {
 	
 	/** The company id logged. */
 	private long companyIdLogged; // ID of the company that is logged in the system
@@ -39,7 +39,7 @@ public class CompanyFacadeF extends Facade {
 	 * the coupon. If no creates new Coupon row  in Data Base Coupon table. 
 	 * @param coupon the coupon
 	 */
-	// tested works
+	
 	public void createCoupon(Coupon coupon) {
 		try {
 			if (helperDAO.ifExist("COUPON", "TITLE", coupon.getTitle())) { // need test
@@ -61,7 +61,7 @@ public class CompanyFacadeF extends Facade {
 	 * to the company, if yes deletes the Coupon from all tables.
 	 * @param coupon the coupon
 	 */
-	// need to complete and test
+
 	public void removeCoupon(Coupon coupon) {
 		Collection<Long> couponsIds;
 		try {
@@ -93,7 +93,7 @@ public class CompanyFacadeF extends Facade {
 	 * If yes Updates all attributes. 
 	 * @param coupon the coupon
 	 */
-	// TEST DONE , works
+	
 	public void updateCoupon(Coupon coupon) {
 		// need check if that coupon belongs to the company
 		Collection<Long> couponsIds;
@@ -121,7 +121,7 @@ public class CompanyFacadeF extends Facade {
 	 * @return the coupon by id
 	 * 
 	 */
-	// done and works
+
 	public Coupon getCouponById(long id) {
 		Coupon coupon = null;
 		Collection<Long> couponsIds;
@@ -146,7 +146,7 @@ public class CompanyFacadeF extends Facade {
 	 * Returns all coupons list belong to the Company.
 	 * @return the all coupons
 	 */
-	// Test done - works
+
 	public Collection<Coupon> getAllCoupons() {
 		Collection<Coupon> allCoupons = new HashSet<Coupon>();
 		Collection<Long> couponsIds;

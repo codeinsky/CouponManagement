@@ -14,22 +14,22 @@ import couponSystemException.CouponSystemException;
  * The Class ConnectionPool.
  */
 public class ConnectionPool {
-	
+
 	/** The connection pool. */
 	private Set<Connection> connectionPool = new HashSet<>();
-	
+
 	/** The pool back UP. */
 	private Set<Connection> poolBackUP = connectionPool; // new reference for connection pool close
-	
+
 	/** The url. */
 	String url = "jdbc:derby://localhost:1527/CuponSystemDB;"; // database URL , driver , port
-	
+
 	/** The connection count. */
 	private int connectionCount = 10;
-	
+
 	/** The instance. */
-	private static ConnectionPool instance; // single ton instance of ConnectionPool
-	// private single ton constructor
+	private static ConnectionPool instance;
+	// private singleton constructor
 
 	/**
 	 * Instantiates a new connection pool.
@@ -113,8 +113,8 @@ public class ConnectionPool {
 	 * @throws CouponSystemException the coupon system exception
 	 */
 	// CLOSEING ALL CONNECTIONS
-	// need to update with closing flag to prevent 
-	// taking connections during close 
+	// need to update with closing flag to prevent
+	// taking connections during close
 	public void closeConnections() throws CouponSystemException {
 		if (connectionPool.size() < 10) {
 			System.out.println("Please do not shut down, data still transfering with data-base");
@@ -144,10 +144,9 @@ public class ConnectionPool {
 		}
 	}
 
-	
 	/**
-	 * Gets the connection pool.
-	 * Single ton get method 
+	 * Gets the connection pool. Singleton get method
+	 * 
 	 * @return the connection pool
 	 */
 	public static ConnectionPool getConnectionPool() {

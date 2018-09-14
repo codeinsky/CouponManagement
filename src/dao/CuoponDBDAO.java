@@ -13,32 +13,26 @@ import beans.CouponType;
 import couponSystemException.CouponSystemException;
 import dbConnectionPool.ConnectionPool;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * The Class CuoponDBDAO.
  *
- * @author Alexander
- * CouponDBDAO class includes methods based on CouponDAO interface. 
- * Operations with DataBase Coupon table  
+ * CouponDBDAO class includes methods based on CouponDAO interface. Operations
+ * with DataBase Coupon table
  */
 public class CuoponDBDAO implements CuoponDAO {
 
-
-	
-	
-	/* (non-Javadoc)
-	 * @see dao.CuoponDAO#createCoupon(beans.Coupon)
-	 */
 	@Override
 	/**
-	 * CreateCoupon void method receives Coupon bean and create new Row in Coupon Table with Coupon attributes. 
+	 * CreateCoupon void method receives Coupon bean and create new Row in Coupon
+	 * Table with Coupon attributes.
+	 * 
 	 * @see dao.CuoponDAO#createCoupon(beans.Coupon)
-	 * @param coupon 
-	 * @throws CuponSystemException 
+	 * @param coupon
+	 * @throws CuponSystemException
 	 * 
 	 **/
-	
+
 	public void createCoupon(Coupon coupon) throws CouponSystemException {
 		String sql = "INSERT INTO COUPON(ID, TITLE , START_DATE, END_DATE, AMOUNT, TYPE , MESSAGE, PRICE , IMAGE) VALUES(?,?,?,?,?,?,?,?,?)";
 		ConnectionPool pool = ConnectionPool.getConnectionPool();
@@ -62,11 +56,10 @@ public class CuoponDBDAO implements CuoponDAO {
 		}
 
 	}
-	
-	
+
 	/**
-	 * RemoveCoupon receives Coupon bean and search for it in DataBase with ID. 
-	 * Removes(delete) the coupon row. 
+	 * RemoveCoupon receives Coupon bean and search for it in DataBase with ID.
+	 * Removes(delete) the coupon row.
 	 *
 	 * @param the coupon
 	 * @throws the coupon system exception
@@ -90,8 +83,8 @@ public class CuoponDBDAO implements CuoponDAO {
 	}
 
 	/**
-	 * UpdateCoupon void method receives Coupon bean, search  for existing coupon in DatBase 
-	 * Coupon table with same ID. Update (overwrite) all attributes. 
+	 * UpdateCoupon void method receives Coupon bean, search for existing coupon in
+	 * DatBase Coupon table with same ID. Update (overwrite) all attributes.
 	 *
 	 * @param coupon the coupon
 	 * @throws CouponSystemException the coupon system exception
@@ -124,9 +117,8 @@ public class CuoponDBDAO implements CuoponDAO {
 	}
 
 	/**
-	 * GetCoupon method receives ID and look for existing coupon in DataBase in Coupon 
-	 * table. 
-	 * Returns Coupon bean.
+	 * GetCoupon method receives ID and look for existing coupon in DataBase in
+	 * Coupon table. Returns Coupon bean.
 	 *
 	 * @param id long
 	 * @return Coupon
