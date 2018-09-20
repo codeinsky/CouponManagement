@@ -2,11 +2,12 @@ package couponTests;
 
 import java.sql.Date;
 
-import CouponSystem.CouponSystem;
 import beans.Company;
 import beans.Coupon;
 import beans.CouponType;
 import beans.Customer;
+import couponSystem.CouponSystem;
+import couponSystem.DailyCouponExpirationTask;
 import facades.AdminFacadeF;
 import facades.CompanyFacadeF;
 import facades.CustomerFacadeF;
